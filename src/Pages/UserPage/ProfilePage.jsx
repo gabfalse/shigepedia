@@ -16,7 +16,7 @@ import {
 
 import {
   getProfile,
-} from "../../Utils/Api/Proile";
+} from "../../Utils/Api/Profile";
 
 export default function ProfilePage() {
 
