@@ -51,9 +51,7 @@ export default function ProfilePage() {
 
         try {
 
-          setLoading(
-            true
-          );
+          setLoading(true);
 
           const savedUser =
             JSON.parse(
@@ -62,9 +60,7 @@ export default function ProfilePage() {
               )
             );
 
-          if (
-            !savedUser?.id
-          ) {
+          if (!savedUser?.id) {
 
             setError(
               "User tidak ditemukan"
@@ -93,9 +89,7 @@ export default function ProfilePage() {
 
         } catch (err) {
 
-          console.error(
-            err
-          );
+          console.error(err);
 
           setError(
 
@@ -110,9 +104,7 @@ export default function ProfilePage() {
 
         } finally {
 
-          setLoading(
-            false
-          );
+          setLoading(false);
         }
       };
 
@@ -396,113 +388,229 @@ export default function ProfilePage() {
 
         </div>
 
-        {/* CREW RANK */}
-        <button
-          onClick={() =>
-            setOpenRank(true)
-          }
-          className="
-            mt-8
-            w-full
-            bg-zinc-800
-            border
-            border-zinc-700
-            rounded-3xl
-            p-5
-            text-left
-            hover:border-purple-500/40
-            hover:bg-zinc-800/70
-            transition-all
-          "
-        >
+        {/* CREW + VERIFY */}
+        <div className="
+          mt-8
+          grid
+          grid-cols-1
+          md:grid-cols-2
+          gap-4
+        ">
 
-          <div className="
-            flex
-            justify-between
-            items-start
-          ">
+          {/* CREW RANK */}
+          <button
+            onClick={() =>
+              setOpenRank(true)
+            }
+            className="
+              bg-zinc-800
+              border
+              border-zinc-700
+              rounded-3xl
+              p-5
+              text-left
+              hover:border-purple-500/40
+              hover:bg-zinc-800/70
+              transition-all
+            "
+          >
 
-            <div>
+            <div className="
+              flex
+              justify-between
+              items-start
+            ">
 
-              <div className="
-                flex
-                items-center
-                gap-2
-                text-zinc-400
-                text-sm
-                mb-2
-              ">
-                <Star size={18} />
-                Crew Rank
+              <div>
+
+                <div className="
+                  flex
+                  items-center
+                  gap-2
+                  text-zinc-400
+                  text-sm
+                  mb-2
+                ">
+                  <Star size={18} />
+                  Crew Rank
+                </div>
+
+                {!user?.tiktok_verified ? (
+
+                  <>
+                    <p className="
+                      text-lg
+                      font-bold
+                      text-zinc-400
+                    ">
+                      🔒 Locked
+                    </p>
+
+                    <p className="
+                      text-xs
+                      text-zinc-500
+                      mt-1
+                    ">
+                      Verify TikTok
+                      to unlock
+                      Crew Rank
+                    </p>
+                  </>
+
+                ) : (
+
+                  <>
+                    <p className={`
+                      text-2xl
+                      font-black
+                      ${user?.crew_color}
+                    `}>
+                      {user?.crew_title}
+                    </p>
+
+                    {user?.next_crew && (
+                      <div className="
+                        flex
+                        items-center
+                        gap-1
+                        text-xs
+                        text-zinc-400
+                        mt-2
+                      ">
+                        Next:
+                        {user?.next_crew}
+                      </div>
+                    )}
+                  </>
+
+                )}
+
               </div>
 
-              {!user?.tiktok_verified ? (
-
-                <>
-                  <p className="
-                    text-lg
-                    font-bold
-                    text-zinc-400
-                  ">
-                    🔒 Locked
-                  </p>
-
-                  <p className="
-                    text-xs
-                    text-zinc-500
-                    mt-1
-                  ">
-                    Verify TikTok
-                    to unlock
-                    Crew Rank
-                  </p>
-                </>
-
-              ) : (
-
-                <>
-                  <p className={`
-                    text-2xl
-                    font-black
-                    ${user?.crew_color}
-                  `}>
-                    {user?.crew_title}
-                  </p>
-
-                  {user?.next_crew && (
-                    <div className="
-                      flex
-                      items-center
-                      gap-1
-                      text-xs
-                      text-zinc-400
-                      mt-2
-                    ">
-                      Next:
-                      {user?.next_crew}
-                    </div>
-                  )}
-                </>
-
-              )}
+              <ChevronRight
+                className="
+                  text-zinc-500
+                "
+              />
 
             </div>
 
-            <ChevronRight
-              className="
-                text-zinc-500
-              "
-            />
+          </button>
 
-          </div>
+          {/* TIKTOK VERIFY */}
+          <button
+            onClick={() =>
+              setOpen(true)
+            }
+            className={`
+              border
+              rounded-3xl
+              p-5
+              text-left
+              transition-all
+              ${
+                user?.tiktok_verified
+                  ? `
+                    bg-green-500/10
+                    border-green-500/20
+                    hover:border-green-400
+                  `
+                  : `
+                    bg-zinc-800
+                    border-zinc-700
+                    hover:border-pink-500/40
+                    hover:bg-zinc-800/70
+                  `
+              }
+            `}
+          >
 
-        </button>
+            <div className="
+              flex
+              justify-between
+              items-start
+            ">
+
+              <div>
+
+                <div className="
+                  flex
+                  items-center
+                  gap-2
+                  text-zinc-400
+                  text-sm
+                  mb-2
+                ">
+                  <CheckCircle size={18} />
+                  TikTok Status
+                </div>
+
+                {user?.tiktok_verified ? (
+
+                  <>
+                    <p className="
+                      text-2xl
+                      font-black
+                      text-green-400
+                    ">
+                      Verified
+                    </p>
+
+                    <p className="
+                      text-xs
+                      text-zinc-400
+                      mt-1
+                    ">
+                      @{user?.tiktok_username}
+                    </p>
+                  </>
+
+                ) : (
+
+                  <>
+                    <p className="
+                      text-2xl
+                      font-black
+                      text-pink-400
+                    ">
+                      Verify Now
+                    </p>
+
+                    <p className="
+                      text-xs
+                      text-zinc-500
+                      mt-1
+                    ">
+                      Connect your TikTok
+                      account
+                    </p>
+                  </>
+
+                )}
+
+              </div>
+
+              <ChevronRight
+                className="
+                  text-zinc-500
+                "
+              />
+
+            </div>
+
+          </button>
+
+        </div>
 
       </div>
+
     </div>
   );
 }
 
+// ======================
+// STAT CARD
+// ======================
 function StatCard({
   icon,
   title,
@@ -511,36 +619,47 @@ function StatCard({
 }) {
 
   return (
+
     <div className="
       bg-zinc-800
       border
       border-zinc-700
       rounded-3xl
       p-5
-      text-center
     ">
+
       <div className="
-        mx-auto
-        mb-3
-        w-fit
+        flex
+        items-center
+        justify-between
       ">
-        {icon}
+
+        <div>
+
+          <p className="
+            text-zinc-400
+            text-sm
+          ">
+            {title}
+          </p>
+
+          <h3 className={`
+            text-2xl
+            font-black
+            mt-2
+            ${color}
+          `}>
+            {value}
+          </h3>
+
+        </div>
+
+        <div>
+          {icon}
+        </div>
+
       </div>
 
-      <p className="
-        text-zinc-400
-        text-sm
-      ">
-        {title}
-      </p>
-
-      <h3 className={`
-        text-2xl
-        font-black
-        ${color}
-      `}>
-        {value.toLocaleString()}
-      </h3>
     </div>
   );
 }
