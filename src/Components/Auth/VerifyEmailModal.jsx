@@ -1,4 +1,4 @@
-import { useState }
+import { useEffect, useState }
   from "react";
 
 import {
@@ -8,6 +8,8 @@ import {
 
 import {
   sendVerification,
+  resendVerification,
+  verifyEmailOtp,
 } from "../../Utils/Api/Auth";
 
 export default function VerifyEmailModal() {
@@ -15,20 +17,27 @@ export default function VerifyEmailModal() {
   const [open, setOpen] =
     useState(false);
 
+  const [loading, setLoading] =
+    useState(false);
+
   const [
-    loading,
-    setLoading,
+    verifyLoading,
+    setVerifyLoading,
   ] = useState(false);
 
-  const [
-    error,
-    setError,
-  ] = useState("");
+  const [error, setError] =
+    useState("");
+
+  const [success, setSuccess] =
+    useState("");
+
+  const [otp, setOtp] =
+    useState("");
 
   const [
-    success,
-    setSuccess,
-  ] = useState("");
+    cooldown,
+    setCooldown,
+  ] = useState(0);
 
   const user =
     JSON.parse(
@@ -40,7 +49,36 @@ export default function VerifyEmailModal() {
   const email =
     user?.email || "";
 
-  const handleVerify =
+  // =====================
+  // Countdown resend
+  // =====================
+  useEffect(() => {
+
+    if (
+      cooldown <= 0
+    ) return;
+
+    const timer =
+      setInterval(() => {
+
+        setCooldown(
+          (prev) =>
+            prev - 1
+        );
+
+      }, 1000);
+
+    return () =>
+      clearInterval(
+        timer
+      );
+
+  }, [cooldown]);
+
+  // =====================
+  // Kirim OTP pertama
+  // =====================
+  const handleSendOtp =
     async () => {
 
       setError("");
@@ -49,7 +87,7 @@ export default function VerifyEmailModal() {
       if (!email) {
 
         setError(
-          "Akun ini belum memiliki email terdaftar"
+          "Akun belum memiliki email"
         );
 
         return;
@@ -57,7 +95,9 @@ export default function VerifyEmailModal() {
 
       try {
 
-        setLoading(true);
+        setLoading(
+          true
+        );
 
         const response =
           await sendVerification({
@@ -67,62 +107,219 @@ export default function VerifyEmailModal() {
         if (
           !response.success
         ) {
+
           throw new Error(
             response.message
           );
         }
 
         setSuccess(
-          response.message ||
-            "Email verifikasi berhasil dikirim"
+          response.message
         );
 
-        // auto close
-        setTimeout(() => {
-
-          setOpen(false);
-
-          setSuccess("");
-
-        }, 1500);
-
-      } catch (err) {
-
-        console.error(
-          err
+        setCooldown(
+          60
         );
+
+      } catch (
+        err
+      ) {
 
         setError(
-          err.response?.data
+          err.response
+            ?.data
             ?.message ||
-
-          err.response?.data
-            ?.error ||
 
           err.message ||
 
-          "Gagal mengirim email"
+          "Gagal mengirim OTP"
         );
 
       } finally {
 
-        setLoading(false);
+        setLoading(
+          false
+        );
       }
+    };
+
+  // =====================
+  // Resend OTP
+  // =====================
+  const handleResend =
+    async () => {
+
+      try {
+
+        setLoading(
+          true
+        );
+
+        const response =
+          await resendVerification({
+            email,
+          });
+
+        if (
+          !response.success
+        ) {
+
+          throw new Error(
+            response.message
+          );
+        }
+
+        setSuccess(
+          response.message
+        );
+
+        setCooldown(
+          60
+        );
+
+      } catch (
+        err
+      ) {
+
+        setError(
+          err.response
+            ?.data
+            ?.message ||
+
+          err.message ||
+
+          "Gagal resend OTP"
+        );
+
+      } finally {
+
+        setLoading(
+          false
+        );
+      }
+    };
+
+  // =====================
+  // Verify OTP
+  // =====================
+  const handleVerify =
+    async () => {
+
+      setError("");
+      setSuccess("");
+
+      if (
+        otp.length !== 6
+      ) {
+
+        setError(
+          "OTP harus 6 digit"
+        );
+
+        return;
+      }
+
+      try {
+
+        setVerifyLoading(
+          true
+        );
+
+        const response =
+          await verifyEmailOtp({
+            email,
+            otp,
+          });
+
+        if (
+          !response.success
+        ) {
+
+          throw new Error(
+            response.message
+          );
+        }
+
+        setSuccess(
+          "Email berhasil diverifikasi 🎉"
+        );
+
+        // update local user
+        const updatedUser =
+          {
+            ...user,
+            email_verified:
+              1,
+          };
+
+        localStorage.setItem(
+          "user",
+          JSON.stringify(
+            updatedUser
+          )
+        );
+
+        setTimeout(() => {
+
+          setOpen(
+            false
+          );
+
+          window.location.reload();
+
+        }, 1500);
+
+      } catch (
+        err
+      ) {
+
+        setError(
+          err.response
+            ?.data
+            ?.message ||
+
+          err.message ||
+
+          "OTP salah"
+        );
+
+      } finally {
+
+        setVerifyLoading(
+          false
+        );
+      }
+    };
+
+  // =====================
+  // Open modal
+  // =====================
+  const handleOpen =
+    () => {
+
+      setOpen(
+        true
+      );
+
+      setOtp("");
+
+      handleSendOtp();
     };
 
   return (
     <>
       {/* Trigger */}
-      <span
-        onClick={() =>
-          setOpen(true)
-        }
-        className="text-purple-400 cursor-pointer hover:underline"
-      >
-        Verifikasi Email
-      </span>
+    {!user?.email_verified && (
+  <span
+    onClick={
+      handleOpen
+    }
+    className="text-purple-400 cursor-pointer hover:underline"
+  >
+    Verifikasi Email
+  </span>
+)}
 
-      {/* Modal */}
       {open && (
         <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-5">
 
@@ -131,7 +328,9 @@ export default function VerifyEmailModal() {
             {/* Close */}
             <button
               onClick={() =>
-                setOpen(false)
+                setOpen(
+                  false
+                )
               }
               className="absolute right-5 top-5 text-zinc-400 hover:text-white"
             >
@@ -142,9 +341,11 @@ export default function VerifyEmailModal() {
             <div className="flex flex-col items-center mb-6">
 
               <div className="bg-purple-600 p-4 rounded-2xl mb-4">
+
                 <Mail
                   size={28}
                 />
+
               </div>
 
               <h2 className="text-2xl font-bold text-white">
@@ -152,13 +353,12 @@ export default function VerifyEmailModal() {
               </h2>
 
               <p className="text-zinc-400 text-sm text-center mt-2">
-                Email verifikasi
-                akan dikirim ke
+                Masukkan kode OTP
+                yang dikirim ke
               </p>
 
               <p className="text-purple-400 font-medium mt-1 break-all">
-                {email ||
-                  "Tidak ada email"}
+                {email}
               </p>
 
             </div>
@@ -176,19 +376,56 @@ export default function VerifyEmailModal() {
               </div>
             )}
 
-            {/* Button */}
+            {/* OTP Input */}
+            <input
+              type="text"
+              value={otp}
+              maxLength={6}
+              onChange={(
+                e
+              ) =>
+                setOtp(
+                  e.target.value.replace(
+                    /\D/g,
+                    ""
+                  )
+                )
+              }
+              placeholder="123456"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-2xl px-4 py-4 text-center text-2xl tracking-[10px] text-white outline-none focus:border-purple-500 mb-4"
+            />
+
+            {/* Verify */}
             <button
               onClick={
                 handleVerify
               }
               disabled={
-                loading
+                verifyLoading
               }
               className="w-full bg-purple-600 hover:bg-purple-700 transition rounded-2xl py-3 font-semibold text-white disabled:opacity-50"
             >
-              {loading
-                ? "Mengirim..."
-                : "Kirim Verifikasi"}
+              {verifyLoading
+                ? "Memverifikasi..."
+                : "Verifikasi OTP"}
+            </button>
+
+            {/* Resend */}
+            <button
+              onClick={
+                handleResend
+              }
+              disabled={
+                cooldown >
+                  0 ||
+                loading
+              }
+              className="w-full mt-3 text-sm text-zinc-400 hover:text-purple-400 transition disabled:opacity-50"
+            >
+              {cooldown >
+              0
+                ? `Kirim ulang OTP (${cooldown}s)`
+                : "Tidak menerima email? Kirim ulang"}
             </button>
 
           </div>

@@ -8,7 +8,7 @@ import VisitorRoute from "./VisitorRoute";
 
 import HomePage from "../Pages/UserPage/HomePage";
 import ProfilePage from "../Pages/UserPage/ProfilePage";
-import VerifyEmailPage from "../Pages/Auth/VerifyEmailPage";
+
 
 export default function IndexRoute() {
 
@@ -18,11 +18,7 @@ export default function IndexRoute() {
       {/* Visitor Routes */}
       {VisitorRoute()}
 
-      {/* Verify Email Route (PUBLIC) */}
-      <Route
-        path="/verify-email"
-        element={<VerifyEmailPage />}
-      />
+ 
 
       {/* Protected Routes */}
       <Route

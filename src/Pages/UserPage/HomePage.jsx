@@ -1,96 +1,487 @@
-import Navbar from "../../Components/Navbar";
-import { Mail } from "lucide-react";
-import VerifyEmailModal from "../../Components/Auth/VerifyEmailModal";
+import FloatingWhatsappButton
+    from "../../Components/General/FloatingWhatsappButton";
 
-export default function HomePage() {
+import Navbar
+    from "../../Components/Navbar";
 
-  const user = JSON.parse(localStorage.getItem("user"));
+import Footer
+    from "../../Components/Footer";
 
-  return (
-    <div className="min-h-screen bg-zinc-950 text-white">
+import VerifyEmailModal
+    from "../../Components/Auth/VerifyEmailModal";
 
-      <Navbar />
+import {
+    Mail,
+    Gamepad2,
+    Coins,
+    Radio,
+    Users,
+    ChevronRight,
+} from "lucide-react";
 
-      <div className="flex items-center justify-center min-h-screen p-6">
+import {
+    useNavigate,
+} from "react-router-dom";
 
-        <div className="w-full max-w-3xl text-center">
+export default function
+HomePage() {
 
-          {/* Badge */}
-          <div className="inline-flex items-center mt-12 gap-2 bg-purple-500/10 border border-purple-500/20 text-purple-400 px-5 py-2 rounded-full mb-10">
-            🔥 SHIGEPEDIA Community Hub
-          </div>
+    const navigate =
+        useNavigate();
 
-          {/* Greeting */}
-          <h1 className="text-5xl md:text-6xl font-black mb-5 leading-tight">
-            Halo,{" "}
-            <span className="text-purple-400">
-              {user?.name || "Crew"}
-            </span>
-            👋
-          </h1>
+    const user =
+        JSON.parse(
+            localStorage.getItem(
+                "user"
+            )
+        );
 
-          {/* Main Text */}
-          <p className="text-zinc-300 text-xl md:text-2xl leading-relaxed">
-            Selamat bergabung dan menjadi bagian dari SHIGE CREW.
-            <br />
-            Semua fitur, event, dan aktivitas berada dalam satu tempat.
-          </p>
+    const menus = [
 
-          <p className="text-zinc-500 mt-5 text-lg">
-            Nikmati pengalaman terbaikmu bersama SHIGE Crew.
-          </p>
+        {
+            title:
+                "Mabar VIP",
 
-          {/* Email Info */}
-          <div className="mt-8 flex flex-col items-center gap-3 text-sm text-zinc-400">
+            desc:
+                "Booking mabar bareng SHIGE",
 
-            <div className="flex items-center gap-2">
-              <Mail size={16} className="text-purple-400" />
-              Informasi penting akan dikirim ke email kamu
-            </div>
+            icon:
+                Gamepad2,
 
-            <VerifyEmailModal />
+            action:
+                () =>
+                    window.open(
+                        "https://sociabuzz.com/shige/tribe",
+                        "_blank"
+                    ),
+        },
 
-          </div>
+        {
+            title:
+                "Interactive Live",
 
-          {/* Feature Card */}
-          <div className="mt-14 bg-zinc-900 border border-zinc-800 rounded-3xl p-8 text-left">
+            desc:
+                "Point, title & support",
 
-            <h3 className="text-2xl font-bold mb-6 text-center">
-              Fitur SHIGEPEDIA
-            </h3>
+            icon:
+                Radio,
 
-            <div className="grid md:grid-cols-2 gap-4 text-zinc-300">
+            action:
+                () =>
+                    navigate(
+                        "/profile"
+                    ),
+        },
 
-              <div className="bg-zinc-800/50 p-4 rounded-2xl">
-                🎮 Booking Mabar VIP System
-              </div>
+        {
+            title:
+                "Toko Game",
 
-              <div className="bg-zinc-800/50 p-4 rounded-2xl">
-                ⚡ Interactive Live Tools
-              </div>
+            desc:
+                "Top up & kebutuhan game",
 
-              <div className="bg-zinc-800/50 p-4 rounded-2xl">
-                💎 Top Up Mobile Legends
-              </div>
+            icon:
+                Coins,
 
-              <div className="bg-zinc-800/50 p-4 rounded-2xl">
-                🏆 Crew Level & Ranking
-              </div>
+            action:
+                () =>
+                    navigate("#"),
+        },
 
-              <div className="bg-zinc-800/50 p-4 rounded-2xl md:col-span-2 text-center">
-                🔥 Live Leaderboard Support System
-              </div>
+        {
+            title:
+                "Whatsapp Channel",
 
-            </div>
-          </div>
+            desc:
+                "Info terbaru SHIGE",
 
-          {/* Footer */}
-          <p className="text-zinc-600 text-sm mt-10">
-            SHIGEPEDIA • SHIGE Crew Ecosystem
-          </p>
+            icon:
+                Users,
+
+            action:
+                () =>
+                    window.open(
+                        "https://whatsapp.com/channel/0029VbCMACH1dAwBXkr1md1k",
+                        "_blank"
+                    ),
+        },
+    ];
+
+    return (
+
+        <div className="
+            min-h-screen
+            bg-zinc-950
+            text-white
+            flex
+            flex-col
+        ">
+
+            <Navbar />
+
+            <main className="
+                flex-1
+                max-w-7xl
+                w-full
+                mx-auto
+                px-4
+                md:px-6
+                py-6
+                md:py-10
+            ">
+
+                {/* HERO */}
+                <section className="
+                    relative
+                    overflow-hidden
+                    rounded-[36px]
+                    border
+                    border-purple-500/20
+                    bg-gradient-to-br
+                    from-purple-700/20
+                    via-zinc-900
+                    to-zinc-950
+                    p-6
+                    md:p-10
+                ">
+
+                    <div className="
+                        absolute
+                        top-0
+                        right-0
+                        w-[300px]
+                        h-[300px]
+                        bg-purple-600/20
+                        blur-[120px]
+                    " />
+
+                    <div className="
+                        relative
+                        z-10
+                        max-w-3xl
+                    ">
+
+                        <div className="
+                            inline-flex
+                            items-center
+                            gap-2
+                            rounded-full
+                            border
+                            border-purple-500/20
+                            bg-purple-500/10
+                            px-4
+                            py-2
+                            text-sm
+                            text-purple-300
+                            mb-5
+                        ">
+                            🔥 SHIGEPEDIA Community Hub
+                        </div>
+
+                        <h1 className="
+                            text-4xl
+                            md:text-6xl
+                            font-black
+                            leading-tight
+                        ">
+                            Halo,{" "}
+
+                            <span className="
+                                text-purple-400
+                            ">
+                                {
+                                    user?.name ||
+                                    "Crew"
+                                }
+                            </span>
+
+                            👋
+                        </h1>
+
+                        <p className="
+                            mt-5
+                            text-zinc-300
+                            text-base
+                            md:text-lg
+                            leading-relaxed
+                            max-w-2xl
+                        ">
+                            Semua aktivitas
+                            SHIGE Crew
+                            berada di satu
+                            tempat. Booking
+                            mabar, support
+                            live, leaderboard,
+                            dan top up game.
+                        </p>
+
+                        {/* EMAIL */}
+                        <div className="
+                            mt-8
+                            rounded-3xl
+                            border
+                            border-zinc-800
+                            bg-zinc-900/60
+                            p-5
+                        ">
+
+                            <div className="
+                                flex
+                                items-start
+                                gap-3
+                            ">
+
+                                <div className="
+                                    mt-1
+                                ">
+                                    <Mail
+                                        size={20}
+                                        className="
+                                            text-purple-400
+                                        "
+                                    />
+                                </div>
+
+                                <div>
+
+                                    <h3 className="
+                                        font-semibold
+                                    ">
+                                        Email
+                                        Verification
+                                    </h3>
+
+                                    <p className="
+                                        text-sm
+                                        text-zinc-400
+                                        mt-1
+                                    ">
+                                        Informasi
+                                        penting
+                                        akun dan
+                                        event akan
+                                        dikirim ke
+                                        email kamu.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            {!user?.
+                                email_verified && (
+
+                                <div className="
+                                    mt-4
+                                ">
+                                    <VerifyEmailModal />
+                                </div>
+                            )}
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                {/* MENU */}
+                <section className="
+                    mt-10
+                ">
+
+                    <div className="
+                        flex
+                        items-center
+                        justify-between
+                        mb-5
+                    ">
+
+                        <h2 className="
+                            text-2xl
+                            font-bold
+                        ">
+                            Explore
+                            SHIGEPEDIA
+                        </h2>
+
+                        <span className="
+                            text-sm
+                            text-zinc-500
+                        ">
+                            Crew Features
+                        </span>
+
+                    </div>
+
+                    <div className="
+                        grid
+                        grid-cols-1
+                        md:grid-cols-2
+                        xl:grid-cols-4
+                        gap-5
+                    ">
+
+                        {menus.map(
+                            (
+                                item,
+                                index
+                            ) => {
+
+                                const Icon =
+                                    item.icon;
+
+                                return (
+
+                                    <button
+                                        key={
+                                            index
+                                        }
+                                        onClick={
+                                            item.action
+                                        }
+                                        className="
+                                            group
+                                            h-full
+                                            rounded-[28px]
+                                            border
+                                            border-zinc-800
+                                            bg-zinc-900
+                                            p-6
+                                            text-left
+                                            transition-all
+                                            hover:border-purple-500/40
+                                            hover:-translate-y-1
+                                        "
+                                    >
+
+                                        <div className="
+                                            flex
+                                            items-center
+                                            justify-between
+                                        ">
+
+                                            <div className="
+                                                rounded-2xl
+                                                bg-purple-500/10
+                                                p-4
+                                            ">
+
+                                                <Icon
+                                                    size={28}
+                                                    className="
+                                                        text-purple-400
+                                                    "
+                                                />
+
+                                            </div>
+
+                                            <ChevronRight
+                                                className="
+                                                    text-zinc-600
+                                                    transition
+                                                    group-hover:text-purple-400
+                                                "
+                                            />
+
+                                        </div>
+
+                                        <h3 className="
+                                            mt-5
+                                            text-lg
+                                            font-bold
+                                        ">
+                                            {
+                                                item.title
+                                            }
+                                        </h3>
+
+                                        <p className="
+                                            mt-2
+                                            text-sm
+                                            text-zinc-400
+                                        ">
+                                            {
+                                                item.desc
+                                            }
+                                        </p>
+
+                                    </button>
+                                );
+                            }
+                        )}
+
+                    </div>
+
+                </section>
+
+                {/* COMING SOON */}
+                <section className="
+                    mt-10
+                ">
+
+                    <div className="
+                        rounded-[36px]
+                        border
+                        border-zinc-800
+                        bg-zinc-900
+                        p-6
+                        md:p-8
+                    ">
+
+                        <h3 className="
+                            text-2xl
+                            font-bold
+                            mb-6
+                        ">
+                            🚀 Coming Soon
+                        </h3>
+
+                        <div className="
+                            grid
+                            md:grid-cols-2
+                            gap-4
+                        ">
+
+                            {[
+                                "🎁 Daily Reward",
+                                "⚔ Crew Mission",
+                                "🏆 Support Battle",
+                                "🎫 VIP Event",
+                            ].map(
+                                (
+                                    item
+                                ) => (
+
+                                    <div
+                                        key={
+                                            item
+                                        }
+                                        className="
+                                            rounded-2xl
+                                            bg-zinc-800/50
+                                            border
+                                            border-zinc-800
+                                            p-5
+                                            text-zinc-300
+                                        "
+                                    >
+                                        {item}
+                                    </div>
+                                )
+                            )}
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </main>
+
+            <Footer />
+
+            <FloatingWhatsappButton />
 
         </div>
-      </div>
-    </div>
-  );
+    );
 }

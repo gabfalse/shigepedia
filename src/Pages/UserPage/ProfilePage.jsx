@@ -1,84 +1,201 @@
+import CrewRankModal
+  from "../../Components/General/CrewRankModal";
+
+import TikTokVerifyModal
+  from "../../Components/Auth/TiktokVerifyModal";
+
 import {
   useEffect,
-  useState,
+  useState
 } from "react";
 
 import {
   User,
-  Mail,
   Gamepad2,
   Shield,
   Star,
   Trophy,
   ChevronRight,
+  CheckCircle,
+  Heart,
 } from "lucide-react";
 
 import {
-  getProfile,
+  getProfile
 } from "../../Utils/Api/Profile";
 
 export default function ProfilePage() {
 
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [user, setUser] =
+    useState(null);
 
+  const [loading, setLoading] =
+    useState(true);
+
+  const [error, setError] =
+    useState("");
+
+  const [open, setOpen] =
+    useState(false);
+
+  const [openRank, setOpenRank] =
+    useState(false);
+
+  // ======================
+  // FETCH PROFILE
+  // ======================
   useEffect(() => {
 
-    const fetchProfile = async () => {
+    const fetchProfile =
+      async () => {
 
-      try {
+        try {
 
-        setLoading(true);
+          setLoading(
+            true
+          );
 
-        const savedUser =
-          JSON.parse(localStorage.getItem("user"));
+          const savedUser =
+            JSON.parse(
+              localStorage.getItem(
+                "user"
+              )
+            );
 
-        if (!savedUser?.id) {
-          setError("User tidak ditemukan");
-          return;
+          if (
+            !savedUser?.id
+          ) {
+
+            setError(
+              "User tidak ditemukan"
+            );
+
+            return;
+          }
+
+          const response =
+            await getProfile(
+              savedUser.id
+            );
+
+          if (
+            !response.success
+          ) {
+
+            throw new Error(
+              response.message
+            );
+          }
+
+          setUser(
+            response.user
+          );
+
+        } catch (err) {
+
+          console.error(
+            err
+          );
+
+          setError(
+
+            err.response
+              ?.data
+              ?.message ||
+
+            err.message ||
+
+            "Gagal mengambil profile"
+          );
+
+        } finally {
+
+          setLoading(
+            false
+          );
         }
-
-        const response =
-          await getProfile(savedUser.id);
-
-        if (!response.success) {
-          throw new Error(response.message);
-        }
-
-        setUser(response.user);
-
-      } catch (err) {
-
-        console.error(err);
-
-        setError(
-          err.response?.data?.message ||
-          err.message ||
-          "Gagal mengambil profile"
-        );
-
-      } finally {
-        setLoading(false);
-      }
-    };
+      };
 
     fetchProfile();
 
   }, []);
 
+  // ======================
+  // REFRESH AFTER VERIFY
+  // ======================
+  const handleVerified =
+    async () => {
+
+      const savedUser =
+        JSON.parse(
+          localStorage.getItem(
+            "user"
+          )
+        );
+
+      const response =
+        await getProfile(
+          savedUser.id
+        );
+
+      if (
+        response.success
+      ) {
+
+        setUser(
+          response.user
+        );
+      }
+
+      setOpen(false);
+    };
+
+  // ======================
+  // LOADING
+  // ======================
   if (loading) {
+
     return (
-      <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">
-        <p className="text-zinc-400">Memuat profile...</p>
+      <div className="
+        min-h-screen
+        bg-zinc-950
+        text-white
+        flex
+        items-center
+        justify-center
+      ">
+        <p className="
+          text-zinc-400
+        ">
+          Memuat profile...
+        </p>
       </div>
     );
   }
 
+  // ======================
+  // ERROR
+  // ======================
   if (error) {
+
     return (
-      <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center p-5">
-        <div className="bg-red-500/10 border border-red-500 text-red-400 rounded-2xl p-5">
+      <div className="
+        min-h-screen
+        bg-zinc-950
+        text-white
+        flex
+        items-center
+        justify-center
+        p-5
+      ">
+        <div className="
+          bg-red-500/10
+          border
+          border-red-500
+          text-red-400
+          rounded-2xl
+          p-5
+        ">
           {error}
         </div>
       </div>
@@ -86,91 +203,344 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white p-5 flex items-center justify-center">
 
-      <div className="w-full max-w-2xl bg-zinc-900 border border-zinc-800 rounded-[2rem] p-8 shadow-2xl">
+    <div className="
+      min-h-screen
+      bg-zinc-950
+      text-white
+      p-5
+      flex
+      items-center
+      justify-center
+    ">
 
-        {/* Header */}
-        <div className="flex flex-col items-center text-center">
+      {/* VERIFY MODAL */}
+      <TikTokVerifyModal
+        isOpen={open}
+        onClose={() =>
+          setOpen(false)
+        }
+        user={user}
+        onVerified={
+          handleVerified
+        }
+      />
 
-          <div className="w-28 h-28 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-5">
-            <User size={46} className="text-purple-400" />
+      {/* CREW RANK MODAL */}
+      <CrewRankModal
+        isOpen={openRank}
+        onClose={() =>
+          setOpenRank(false)
+        }
+      />
+
+      <div className="
+        w-full
+        max-w-3xl
+        bg-zinc-900
+        border
+        border-zinc-800
+        rounded-[2rem]
+        p-8
+        shadow-2xl
+      ">
+
+        {/* HEADER */}
+        <div className="
+          flex
+          flex-col
+          items-center
+          text-center
+        ">
+
+          <div className="
+            w-28
+            h-28
+            rounded-full
+            bg-purple-500/10
+            border
+            border-purple-500/20
+            flex
+            items-center
+            justify-center
+            mb-5
+          ">
+
+            <User
+              size={46}
+              className="
+                text-purple-400
+              "
+            />
+
           </div>
 
-          <h1 className="text-3xl font-black">
+          <h1 className="
+            text-3xl
+            font-black
+          ">
             {user?.name}
           </h1>
 
-          <p className={`mt-2 font-semibold text-lg ${user?.crew_color}`}>
-            {user?.crew_title}
-          </p>
+          {user?.tiktok_verified ? (
 
-          <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 capitalize">
-            <Shield size={16} />
+            <div className="
+              mt-3
+              inline-flex
+              items-center
+              gap-2
+              px-3
+              py-1
+              rounded-full
+              bg-green-500/10
+              border
+              border-green-500/20
+              text-green-400
+              text-sm
+            ">
+
+              <CheckCircle
+                size={16}
+              />
+
+              TikTok Verified
+
+            </div>
+
+          ) : (
+
+            <div className="
+              mt-3
+              inline-flex
+              items-center
+              gap-2
+              px-3
+              py-1
+              rounded-full
+              bg-zinc-700/40
+              border
+              border-zinc-600
+              text-zinc-400
+              text-sm
+            ">
+              Not Verified
+            </div>
+          )}
+
+          <div className="
+            mt-4
+            inline-flex
+            items-center
+            gap-2
+            px-4
+            py-2
+            rounded-full
+            bg-purple-500/10
+            border
+            border-purple-500/20
+            text-purple-400
+            capitalize
+          ">
+
+            <Shield
+              size={16}
+            />
+
             {user?.role}
+
           </div>
 
         </div>
 
-        {/* Stats */}
-        <div className="grid md:grid-cols-2 gap-4 mt-10">
+        {/* STATS */}
+        <div className="
+          grid
+          grid-cols-1
+          md:grid-cols-3
+          gap-4
+          mt-8
+        ">
 
-          {/* Email */}
-          <div className="bg-zinc-800 border border-zinc-700 rounded-3xl p-5">
-            <div className="flex items-center gap-2 text-zinc-400 text-sm mb-2">
-              <Mail size={18} />
-              Email
-            </div>
-            <p className="font-semibold break-all">
-              {user?.email || "Belum ditambahkan"}
-            </p>
-          </div>
+          <StatCard
+            icon={
+              <Trophy className="text-yellow-400" />
+            }
+            title="Total Point"
+            value={
+              user?.loyalty_points || 0
+            }
+            color="text-yellow-400"
+          />
 
-          {/* ML ID */}
-          <div className="bg-zinc-800 border border-zinc-700 rounded-3xl p-5">
-            <div className="flex items-center gap-2 text-zinc-400 text-sm mb-2">
-              <Gamepad2 size={18} />
-              ML ID
-            </div>
-            <p className="font-semibold">
-              {user?.ml_id || "Belum ditambahkan"}
-            </p>
-          </div>
+          <StatCard
+            icon={
+              <Heart className="text-pink-400" />
+            }
+            title="Total Live Like"
+            value={
+              user?.total_live_like || 0
+            }
+            color="text-pink-400"
+          />
 
-          {/* Crew Rank */}
-          <div className="bg-zinc-800 border border-zinc-700 rounded-3xl p-5">
-            <div className="flex items-center gap-2 text-zinc-400 text-sm mb-2">
-              <Star size={18} />
-              Crew Rank
-            </div>
+          <StatCard
+            icon={
+              <Gamepad2 className="text-purple-400" />
+            }
+            title="Total Like"
+            value={
+              user?.total_like || 0
+            }
+            color="text-purple-400"
+          />
 
-            <p className={`text-2xl font-black ${user?.crew_color}`}>
-              {user?.crew_title}
-            </p>
+        </div>
 
-            {user?.next_crew && (
-              <div className="flex items-center gap-1 text-xs text-zinc-400 mt-3">
-                <ChevronRight size={14} />
-                Next: {user?.next_crew}
+        {/* CREW RANK */}
+        <button
+          onClick={() =>
+            setOpenRank(true)
+          }
+          className="
+            mt-8
+            w-full
+            bg-zinc-800
+            border
+            border-zinc-700
+            rounded-3xl
+            p-5
+            text-left
+            hover:border-purple-500/40
+            hover:bg-zinc-800/70
+            transition-all
+          "
+        >
+
+          <div className="
+            flex
+            justify-between
+            items-start
+          ">
+
+            <div>
+
+              <div className="
+                flex
+                items-center
+                gap-2
+                text-zinc-400
+                text-sm
+                mb-2
+              ">
+                <Star size={18} />
+                Crew Rank
               </div>
-            )}
-          </div>
 
-          {/* Win Together */}
-          <div className="bg-zinc-800 border border-zinc-700 rounded-3xl p-5">
-            <div className="flex items-center gap-2 text-zinc-400 text-sm mb-2">
-              <Trophy size={18} />
-              Win Together
+              {!user?.tiktok_verified ? (
+
+                <>
+                  <p className="
+                    text-lg
+                    font-bold
+                    text-zinc-400
+                  ">
+                    🔒 Locked
+                  </p>
+
+                  <p className="
+                    text-xs
+                    text-zinc-500
+                    mt-1
+                  ">
+                    Verify TikTok
+                    to unlock
+                    Crew Rank
+                  </p>
+                </>
+
+              ) : (
+
+                <>
+                  <p className={`
+                    text-2xl
+                    font-black
+                    ${user?.crew_color}
+                  `}>
+                    {user?.crew_title}
+                  </p>
+
+                  {user?.next_crew && (
+                    <div className="
+                      flex
+                      items-center
+                      gap-1
+                      text-xs
+                      text-zinc-400
+                      mt-2
+                    ">
+                      Next:
+                      {user?.next_crew}
+                    </div>
+                  )}
+                </>
+
+              )}
+
             </div>
 
-            <p className="text-2xl font-black text-yellow-400">
-              {(user?.win_together || 0).toLocaleString()}
-            </p>
+            <ChevronRight
+              className="
+                text-zinc-500
+              "
+            />
+
           </div>
 
-        </div>
+        </button>
 
       </div>
+    </div>
+  );
+}
+
+function StatCard({
+  icon,
+  title,
+  value,
+  color
+}) {
+
+  return (
+    <div className="
+      bg-zinc-800
+      border
+      border-zinc-700
+      rounded-3xl
+      p-5
+      text-center
+    ">
+      <div className="
+        mx-auto
+        mb-3
+        w-fit
+      ">
+        {icon}
+      </div>
+
+      <p className="
+        text-zinc-400
+        text-sm
+      ">
+        {title}
+      </p>
+
+      <h3 className={`
+        text-2xl
+        font-black
+        ${color}
+      `}>
+        {value.toLocaleString()}
+      </h3>
     </div>
   );
 }
