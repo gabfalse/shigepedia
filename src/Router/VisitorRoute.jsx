@@ -4,6 +4,7 @@ import LoginPage from "../Pages/VisitorPage/LoginPage";
 import RegisterPage from "../Pages/VisitorPage/RegisterPage";
 
 
+
 const VisitorRoute = () => {
   return (
     <>
@@ -21,8 +22,11 @@ const VisitorRoute = () => {
         path="/register"
         element={<RegisterPage />}
       />
+     
+      
     </>
   );
 };
 
 export default VisitorRoute;
+

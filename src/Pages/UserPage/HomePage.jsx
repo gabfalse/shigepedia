@@ -51,7 +51,7 @@ HomePage() {
             action:
                 () =>
                     window.open(
-                        "https://sociabuzz.com/shige/tribe",
+                        "/support",
                         "_blank"
                     ),
         },

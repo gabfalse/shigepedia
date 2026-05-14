@@ -8,6 +8,7 @@ import VisitorRoute from "./VisitorRoute";
 
 import HomePage from "../Pages/UserPage/HomePage";
 import ProfilePage from "../Pages/UserPage/ProfilePage";
+import SupportPage from "../Pages/UserPage/SupportPage"
 
 
 export default function IndexRoute() {
@@ -35,6 +36,15 @@ export default function IndexRoute() {
         element={
           <ProtectedRoute>
             <ProfilePage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/support"
+        element={
+          <ProtectedRoute>
+            <SupportPage />
           </ProtectedRoute>
         }
       />
