@@ -9,6 +9,7 @@ import VisitorRoute from "./VisitorRoute";
 import HomePage from "../Pages/UserPage/HomePage";
 import ProfilePage from "../Pages/UserPage/ProfilePage";
 import SupportPage from "../Pages/UserPage/SupportPage"
+import LeaderboardPage from "../Pages/UserPage/LeaderboardPage";
 
 
 export default function IndexRoute() {
@@ -45,6 +46,15 @@ export default function IndexRoute() {
         element={
           <ProtectedRoute>
             <SupportPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/leaderboard"
+        element={
+          <ProtectedRoute>
+            <LeaderboardPage />
           </ProtectedRoute>
         }
       />

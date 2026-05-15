@@ -64,7 +64,7 @@ export default function ProfilePage() {
           if (!savedUser?.id) {
 
             setError(
-              "User tidak ditemukan"
+              "User tidak ditemukan, silahkan untuk mencoba logout dan login kembali"
             );
 
             return;
