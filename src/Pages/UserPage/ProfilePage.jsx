@@ -18,6 +18,7 @@ import {
   ChevronRight,
   CheckCircle,
   Heart,
+  Sparkles,
 } from "lucide-react";
 
 import {
@@ -143,6 +144,17 @@ export default function ProfilePage() {
     };
 
   // ======================
+  // FORMAT NUMBER
+  // ======================
+  const formatNumber =
+    (num = 0) => {
+
+      return new Intl.NumberFormat(
+        "id-ID"
+      ).format(num);
+    };
+
+  // ======================
   // LOADING
   // ======================
   if (loading) {
@@ -228,7 +240,7 @@ export default function ProfilePage() {
 
       <div className="
         w-full
-        max-w-3xl
+        max-w-4xl
         bg-zinc-900
         border
         border-zinc-800
@@ -348,7 +360,7 @@ export default function ProfilePage() {
         <div className="
           grid
           grid-cols-1
-          md:grid-cols-3
+          md:grid-cols-4
           gap-4
           mt-8
         ">
@@ -359,7 +371,9 @@ export default function ProfilePage() {
             }
             title="Total Point"
             value={
-              user?.loyalty_points || 0
+              formatNumber(
+                user?.loyalty_points
+              )
             }
             color="text-yellow-400"
           />
@@ -370,23 +384,212 @@ export default function ProfilePage() {
             }
             title="Total Live Like"
             value={
-              user?.total_live_like || 0
+              formatNumber(
+                user?.total_tiktok_like
+              )
             }
             color="text-pink-400"
           />
 
           <StatCard
             icon={
+              <Sparkles className="text-cyan-400" />
+            }
+            title="Like Buffer"
+            value={
+              `${formatNumber(
+                user?.like_buffer
+              )}/100`
+            }
+            color="text-cyan-400"
+          />
+
+          <StatCard
+            icon={
               <Gamepad2 className="text-purple-400" />
             }
-            title="Total Like"
+            title="Need Next Point"
             value={
-              user?.total_like || 0
+              formatNumber(
+                user?.like_to_next_point
+              )
             }
             color="text-purple-400"
           />
 
         </div>
+
+        {/* LIKE PROGRESS */}
+        <div className="
+          mt-6
+          bg-zinc-800
+          border
+          border-zinc-700
+          rounded-3xl
+          p-5
+        ">
+
+          <div className="
+            flex
+            items-center
+            justify-between
+            mb-3
+          ">
+
+            <div>
+              <p className="
+                text-sm
+                text-zinc-400
+              ">
+                Progress Next Point
+              </p>
+
+              <h3 className="
+                text-xl
+                font-black
+                text-pink-400
+              ">
+                {user?.like_progress}%
+              </h3>
+            </div>
+
+            <Heart
+              className="
+                text-pink-400
+              "
+            />
+
+          </div>
+
+          <div className="
+            w-full
+            h-3
+            rounded-full
+            bg-zinc-700
+            overflow-hidden
+          ">
+
+            <div
+              className="
+                h-full
+                bg-gradient-to-r
+                from-pink-500
+                to-purple-500
+                rounded-full
+                transition-all
+                duration-500
+              "
+              style={{
+                width: `${user?.like_progress || 0}%`
+              }}
+            />
+
+          </div>
+
+          <p className="
+            text-xs
+            text-zinc-500
+            mt-3
+          ">
+            {
+              user?.like_to_next_point
+            } like lagi untuk
+            mendapatkan 1 point
+          </p>
+
+        </div>
+
+        {/* CREW PROGRESS */}
+        {user?.tiktok_verified && (
+
+          <div className="
+            mt-6
+            bg-zinc-800
+            border
+            border-zinc-700
+            rounded-3xl
+            p-5
+          ">
+
+            <div className="
+              flex
+              justify-between
+              items-center
+              mb-3
+            ">
+
+              <div>
+
+                <p className="
+                  text-sm
+                  text-zinc-400
+                ">
+                  Crew Rank Progress
+                </p>
+
+                <h3 className={`
+                  text-2xl
+                  font-black
+                  ${user?.crew_color}
+                `}>
+                  {user?.crew_title}
+                </h3>
+
+              </div>
+
+              <Star
+                className="
+                  text-yellow-400
+                "
+              />
+
+            </div>
+
+            <div className="
+              w-full
+              h-3
+              rounded-full
+              bg-zinc-700
+              overflow-hidden
+            ">
+
+              <div
+                className="
+                  h-full
+                  bg-gradient-to-r
+                  from-yellow-400
+                  to-orange-500
+                  rounded-full
+                  transition-all
+                  duration-500
+                "
+                style={{
+                  width: `${user?.crew_progress || 0}%`
+                }}
+              />
+
+            </div>
+
+            {user?.next_crew && (
+
+              <p className="
+                text-xs
+                text-zinc-500
+                mt-3
+              ">
+                {
+                  formatNumber(
+                    user?.need_next_crew_points
+                  )
+                } point lagi menuju
+                {` ${user?.next_crew}`}
+              </p>
+
+            )}
+
+          </div>
+
+        )}
 
         {/* CREW + VERIFY */}
         <div className="
