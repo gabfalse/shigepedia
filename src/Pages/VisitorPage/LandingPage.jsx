@@ -130,7 +130,7 @@ export default function LandingPage() {
 
             {/* TopUp & Lapak Akun */}
             <div
-              onClick={() => navigate("/stall")}
+              onClick={() => navigate("/shop")}
               className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:bg-zinc-800 transition cursor-pointer"
             >
               <Coins className="text-purple-400 mb-4" />

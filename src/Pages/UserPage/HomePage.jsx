@@ -43,7 +43,7 @@ HomePage() {
                 "Mabar VIP",
 
             desc:
-                "Booking mabar bareng SHIGE",
+                "Booking mabar VIP bareng SHIGE",
 
             icon:
                 Gamepad2,
@@ -51,7 +51,7 @@ HomePage() {
             action:
                 () =>
                     window.open(
-                        "/support",
+                        "https://sociabuzz.com/shige/tribe",
                         "_blank"
                     ),
         },
@@ -85,7 +85,7 @@ HomePage() {
 
             action:
                 () =>
-                    navigate("#"),
+                    navigate("/shop"),
         },
 
         {

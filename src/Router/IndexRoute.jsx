@@ -10,6 +10,7 @@ import HomePage from "../Pages/UserPage/HomePage";
 import ProfilePage from "../Pages/UserPage/ProfilePage";
 import SupportPage from "../Pages/UserPage/SupportPage"
 import LeaderboardPage from "../Pages/UserPage/LeaderboardPage";
+import ShopPage from "../Pages/UserPage/ShopPage";
 
 
 export default function IndexRoute() {
@@ -49,7 +50,14 @@ export default function IndexRoute() {
           </ProtectedRoute>
         }
       />
-
+<Route
+        path="/shop"
+        element={
+          <ProtectedRoute>
+            <ShopPage />
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/leaderboard"
         element={
