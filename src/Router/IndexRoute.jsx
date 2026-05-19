@@ -1,29 +1,34 @@
-import {
-  Routes,
-  Route,
-} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
+import AdminRoute from "./AdminRoute";
+
 import VisitorRoute from "./VisitorRoute";
+import TopupRoute from "./TopupRoute";
 
 import HomePage from "../Pages/UserPage/HomePage";
 import ProfilePage from "../Pages/UserPage/ProfilePage";
-import SupportPage from "../Pages/UserPage/SupportPage"
+import SupportPage from "../Pages/UserPage/SupportPage";
 import LeaderboardPage from "../Pages/UserPage/LeaderboardPage";
-import ShopPage from "../Pages/UserPage/ShopPage";
 
+import InteractiveLivePage from "../Pages/Live/InteractivLivePage";
+
+// ADMIN PAGE
+import AdminVerification from "../Pages/AdminPage/AdminVerification";
 
 export default function IndexRoute() {
-
   return (
     <Routes>
 
-      {/* Visitor Routes */}
+      {/* =========================
+          PUBLIC / VISITOR ROUTES
+      ========================= */}
       {VisitorRoute()}
+      {TopupRoute()}
 
- 
-
-      {/* Protected Routes */}
+      {/* =========================
+          USER PROTECTED ROUTES
+      ========================= */}
       <Route
         path="/home"
         element={
@@ -50,20 +55,34 @@ export default function IndexRoute() {
           </ProtectedRoute>
         }
       />
-<Route
-        path="/shop"
-        element={
-          <ProtectedRoute>
-            <ShopPage />
-          </ProtectedRoute>
-        }
-      />
+
       <Route
         path="/leaderboard"
         element={
           <ProtectedRoute>
             <LeaderboardPage />
           </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/live"
+        element={
+          <ProtectedRoute>
+            <InteractiveLivePage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* =========================
+          ADMIN ROUTES
+      ========================= */}
+      <Route
+        path="/admin/payments"
+        element={
+          <AdminRoute>
+            <AdminVerification />
+          </AdminRoute>
         }
       />
 

@@ -192,7 +192,7 @@ LeaderboardPage() {
                             text-purple-300
                             mb-5
                         ">
-                            🏆 SHIGEPEDIA Leaderboard
+                            🏆 SHIGEPEDIA Leaderboard 
                         </div>
 
                         <h1 className="
@@ -488,7 +488,7 @@ LeaderboardPage() {
                             text-2xl
                             font-bold
                         ">
-                            Global Ranking
+                            Global Ranking (dalam pengembangan)
                         </h2>
 
                         <span className="

@@ -22,7 +22,7 @@ const VisitorRoute = () => {
         path="/register"
         element={<RegisterPage />}
       />
-     
+   
       
     </>
   );

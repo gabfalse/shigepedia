@@ -1,5 +1,7 @@
-import { useEffect, useState }
-    from "react";
+import {
+    useEffect,
+    useState
+} from "react";
 
 import {
     generateTikTokCode,
@@ -16,45 +18,95 @@ TikTokVerifyModal({
 
 }) {
 
-    const [loading, setLoading] =
+    const [loading,
+        setLoading] =
         useState(false);
 
-    const [username, setUsername] =
+    const [username,
+        setUsername] =
         useState("");
 
     const [verifyCode,
         setVerifyCode] =
         useState("");
 
-    const [step, setStep] =
+    const [step,
+        setStep] =
         useState("username");
 
     const [message,
         setMessage] =
         useState("");
 
+    const [messageType,
+        setMessageType] =
+        useState("error");
+
     // ==========================
-    // Reset Modal State
+    // RESET
     // ==========================
     useEffect(() => {
 
-        if (!isOpen) return;
+        if (!isOpen)
+            return;
 
         setUsername(
+
             user?.
-                tiktok_username || ""
+                tiktok_username ||
+
+            ""
         );
 
-        setVerifyCode("");
+        setVerifyCode(
+
+            user?.
+                tiktok_verify_code ||
+
+            ""
+        );
 
         setMessage("");
 
-        setStep(
-            user?.
-                tiktok_verified
-                ? "verified"
-                : "username"
+        setMessageType(
+            "error"
         );
+
+        // ==========================
+        // VERIFIED
+        // ==========================
+        if (
+            Number(
+                user?.
+                    tiktok_verified
+            ) === 1
+        ) {
+
+            setStep(
+                "verified"
+            );
+
+            return;
+        }
+
+        // ==========================
+        // HAS CODE
+        // ==========================
+        if (
+            user?.
+                tiktok_verify_code
+        ) {
+
+            setStep(
+                "verify"
+            );
+
+        } else {
+
+            setStep(
+                "username"
+            );
+        }
 
     }, [
         isOpen,
@@ -65,7 +117,7 @@ TikTokVerifyModal({
         return null;
 
     // ==========================
-    // Generate Code
+    // GENERATE CODE
     // ==========================
     const handleGenerateCode =
         async () => {
@@ -73,6 +125,10 @@ TikTokVerifyModal({
             if (
                 !username.trim()
             ) {
+
+                setMessageType(
+                    "error"
+                );
 
                 setMessage(
                     "TikTok username wajib diisi"
@@ -83,7 +139,9 @@ TikTokVerifyModal({
 
             try {
 
-                setLoading(true);
+                setLoading(
+                    true
+                );
 
                 setMessage("");
 
@@ -98,22 +156,36 @@ TikTokVerifyModal({
                     });
 
                 if (
-                    !data.success
+                    !data?.success
                 ) {
 
+                    setMessageType(
+                        "error"
+                    );
+
                     setMessage(
-                        data.message
+                        data?.message ||
+                        "Generate code gagal"
                     );
 
                     return;
                 }
 
                 setVerifyCode(
-                    data.verify_code
+                    data?.
+                        verify_code ||
+                    ""
+                );
+
+                setMessageType(
+                    "success"
                 );
 
                 setMessage(
-                    data.instruction ||
+
+                    data?.
+                        instruction ||
+
                     "Code berhasil dibuat"
                 );
 
@@ -124,6 +196,10 @@ TikTokVerifyModal({
             } catch (
                 error
             ) {
+
+                setMessageType(
+                    "error"
+                );
 
                 setMessage(
 
@@ -144,14 +220,16 @@ TikTokVerifyModal({
         };
 
     // ==========================
-    // Verify TikTok
+    // VERIFY
     // ==========================
     const handleVerify =
         async () => {
 
             try {
 
-                setLoading(true);
+                setLoading(
+                    true
+                );
 
                 setMessage("");
 
@@ -163,23 +241,45 @@ TikTokVerifyModal({
                     });
 
                 if (
-                    !data.success
+                    !data?.success
                 ) {
 
+                    setMessageType(
+                        "error"
+                    );
+
                     setMessage(
-                        data.message
+                        data?.message ||
+                        "Verification gagal"
                     );
 
                     return;
                 }
 
+                setMessageType(
+                    "success"
+                );
+
+                setMessage(
+                    data?.message ||
+                    "TikTok berhasil diverifikasi"
+                );
+
                 onVerified?.();
 
-                onClose();
+                setTimeout(() => {
+
+                    onClose();
+
+                }, 1200);
 
             } catch (
                 error
             ) {
+
+                setMessageType(
+                    "error"
+                );
 
                 setMessage(
 
@@ -207,15 +307,17 @@ TikTokVerifyModal({
             flex items-center
             justify-center
             z-50
+            px-4
         ">
 
             <div className="
                 bg-zinc-900
                 border border-zinc-700
-                w-[420px]
+                w-full
+                max-w-md
                 rounded-2xl
                 p-5
-                shadow-xl
+                shadow-2xl
                 text-white
             ">
 
@@ -224,21 +326,34 @@ TikTokVerifyModal({
                     flex
                     justify-between
                     items-center
-                    mb-4
+                    mb-5
                 ">
 
-                    <h2 className="
-                        text-lg
-                        font-bold
-                    ">
-                        TikTok Verification
-                    </h2>
+                    <div>
+
+                        <h2 className="
+                            text-xl
+                            font-bold
+                        ">
+                            TikTok Verification
+                        </h2>
+
+                        <p className="
+                            text-xs
+                            text-zinc-500
+                            mt-1
+                        ">
+                            Verify your TikTok account
+                        </p>
+
+                    </div>
 
                     <button
                         onClick={onClose}
                         className="
-                            text-zinc-400
+                            text-zinc-500
                             hover:text-white
+                            text-lg
                         "
                     >
                         ✕
@@ -247,8 +362,8 @@ TikTokVerifyModal({
                 </div>
 
                 {/* VERIFIED */}
-                {user?.
-                    tiktok_verified ? (
+                {step ===
+                    "verified" ? (
 
                     <div className="
                         text-center
@@ -256,24 +371,24 @@ TikTokVerifyModal({
                     ">
 
                         <div className="
-                            text-green-400
-                            text-4xl
-                            mb-2
+                            text-5xl
+                            mb-3
                         ">
-                            ✔
+                            ✅
                         </div>
 
                         <h3 className="
-                            font-bold
                             text-green-400
+                            text-lg
+                            font-bold
                         ">
                             TikTok Verified
                         </h3>
 
                         <p className="
-                            text-sm
                             text-zinc-400
-                            mt-1
+                            mt-2
+                            text-sm
                         ">
                             @
                             {
@@ -290,13 +405,14 @@ TikTokVerifyModal({
                                 onVerified?.();
                             }}
                             className="
-                                mt-4
-                                px-4 py-2
+                                mt-5
+                                w-full
+                                py-3
                                 rounded-xl
-                                border
-                                border-green-500
-                                text-green-400
-                                hover:bg-green-500/10
+                                bg-green-500
+                                text-white
+                                font-semibold
+                                hover:opacity-90
                             "
                         >
                             Done
@@ -308,20 +424,20 @@ TikTokVerifyModal({
 
                     <div>
 
-                        {/* STEP 1 */}
+                        {/* STEP USERNAME */}
                         {step ===
                             "username" && (
 
                             <>
 
-                                <p className="
+                                <label className="
                                     text-sm
                                     text-zinc-400
-                                    mb-4
+                                    block
+                                    mb-2
                                 ">
-                                    Enter your
-                                    TikTok username
-                                </p>
+                                    TikTok Username
+                                </label>
 
                                 <input
                                     type="text"
@@ -332,6 +448,7 @@ TikTokVerifyModal({
                                         e
                                     ) =>
                                         setUsername(
+
                                             e
                                                 .target
                                                 .value
@@ -346,6 +463,7 @@ TikTokVerifyModal({
                                         border
                                         border-zinc-700
                                         outline-none
+                                        focus:border-pink-500
                                     "
                                 />
 
@@ -371,14 +489,14 @@ TikTokVerifyModal({
                                     {
                                         loading
                                             ? "Generating..."
-                                            : "Generate Code"
+                                            : "Generate Verify Code"
                                     }
                                 </button>
 
                             </>
                         )}
 
-                        {/* STEP 2 */}
+                        {/* STEP VERIFY */}
                         {step ===
                             "verify" && (
 
@@ -386,24 +504,27 @@ TikTokVerifyModal({
 
                                 <div className="
                                     bg-zinc-800
-                                    rounded-xl
-                                    p-4
+                                    border
+                                    border-zinc-700
+                                    rounded-2xl
+                                    p-5
                                     text-center
                                     mb-4
                                 ">
 
                                     <p className="
-                                        text-zinc-400
                                         text-sm
+                                        text-zinc-400
                                         mb-2
                                     ">
-                                        Add this code
-                                        to your TikTok bio
+                                        Put this code in your TikTok bio
                                     </p>
 
                                     <div className="
-                                        text-2xl
-                                        font-bold
+                                        text-3xl
+                                        font-black
+                                        tracking-wider
+                                        text-pink-400
                                     ">
                                         {
                                             verifyCode
@@ -413,31 +534,33 @@ TikTokVerifyModal({
                                 </div>
 
                                 <div className="
+                                    bg-zinc-800/50
+                                    rounded-xl
+                                    p-4
                                     text-sm
-                                    text-zinc-400
+                                    text-zinc-300
+                                    space-y-2
                                     mb-4
-                                    space-y-1
                                 ">
 
                                     <p>
-                                        1.
-                                        Open TikTok
+                                        1. Open TikTok
                                     </p>
 
                                     <p>
-                                        2.
-                                        Edit Profile
+                                        2. Edit profile
                                     </p>
 
                                     <p>
-                                        3.
-                                        Paste code
-                                        in bio
+                                        3. Paste code into bio
                                     </p>
 
                                     <p>
-                                        4.
-                                        Click Verify
+                                        4. Save profile
+                                    </p>
+
+                                    <p>
+                                        5. Click verify button
                                     </p>
 
                                 </div>
@@ -467,18 +590,54 @@ TikTokVerifyModal({
                                     }
                                 </button>
 
+                                <button
+                                    onClick={() => {
+
+                                        setStep(
+                                            "username"
+                                        );
+                                    }}
+                                    className="
+                                        mt-3
+                                        w-full
+                                        py-3
+                                        rounded-xl
+                                        border
+                                        border-zinc-700
+                                        text-zinc-300
+                                        hover:bg-zinc-800
+                                    "
+                                >
+                                    Change Username
+                                </button>
+
                             </>
                         )}
 
                         {/* MESSAGE */}
                         {message && (
 
-                            <div className="
+                            <div className={`
                                 mt-4
                                 text-sm
                                 text-center
-                                text-red-400
-                            ">
+                                rounded-xl
+                                p-3
+                                border
+
+                                ${messageType === "success"
+                                    ? `
+                                        bg-green-500/10
+                                        border-green-500/30
+                                        text-green-400
+                                    `
+                                    : `
+                                        bg-red-500/10
+                                        border-red-500/30
+                                        text-red-400
+                                    `
+                                }
+                            `}>
                                 {message}
                             </div>
                         )}

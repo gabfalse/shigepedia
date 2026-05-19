@@ -69,7 +69,7 @@ HomePage() {
             action:
                 () =>
                     navigate(
-                        "/profile"
+                        "/live"
                     ),
         },
 
