@@ -5,7 +5,7 @@ import { CheckCircle2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function ShopPage() {
+export default function MobileLegend() {
 
   const navigate = useNavigate();
 

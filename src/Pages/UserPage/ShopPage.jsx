@@ -1,11 +1,18 @@
 import Navbar
     from "../../Components/Navbar";
 
+    import { useNavigate }
+    from "react-router-dom";
+
 import Footer
     from "../../Components/Footer";
 
 export default function
 ShopPage() {
+
+    const navigate =
+        useNavigate();
+
 
     return (
 
@@ -66,19 +73,20 @@ ShopPage() {
                     ">
 
                         {/* TOP UP GAME */}
-                        <button
-                            disabled
-                            className="
-                                w-full
-                                rounded-2xl
-                                bg-zinc-800
-                                border
-                                border-zinc-700
-                                py-4
-                                text-zinc-500
-                                cursor-not-allowed
-                            "
-                        >
+                          <button
+            onClick={() =>
+                navigate("/topup/mobile-legend")
+            }
+            className="
+                w-full
+                rounded-2xl
+                bg-purple-600
+                hover:bg-purple-500
+                transition
+                py-4
+                font-semibold
+            "
+        >
                             TOP UP GAME
                             (Sedang Dalam
                             Pengembangan)

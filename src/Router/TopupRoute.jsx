@@ -10,7 +10,7 @@ const VisitorRoute = () => {
       <Route path="/shop" element={<ShopPage />} />
 
       <Route
-        path="/topup/mobilelegend"
+        path="/topup/mobile-legend"
         element={<MobileLegend />}
       />
 
