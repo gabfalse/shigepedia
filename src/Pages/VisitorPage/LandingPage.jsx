@@ -1,359 +1,295 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import {
-  Gamepad2,
   Users,
-  Coins,
-  Radio
+  Trophy,
+  Newspaper,
+  UserPlus,
+  Calendar,
+  Image,
+  Handshake,
+  Shield,
+  ChevronRight,
 } from "lucide-react";
+import Papa from "papaparse";
+
+const TEAM_CSV =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLiZZJKJV_Z8grC-XL3dRakvDtCmyzhY6-G2OpnonhIceiIeHBW9d_olssQJ3EoPp5ptwpFelfMZ6f/pub?gid=1932849059&single=true&output=csv";
 
 export default function LandingPage() {
+  const [team, setTeam] = useState(null);
 
-  const navigate =
-    useNavigate();
-
-  // 🔒 AUTO REDIRECT IF LOGGED IN
   useEffect(() => {
+    Papa.parse(TEAM_CSV, {
+      download: true,
+      header: true,
+      complete: (results) => {
+        setTeam(results.data[0]);
+      },
+    });
+  }, []);
 
-    const user =
-      localStorage.getItem(
-        "user"
-      );
+  const features = [
+    {
+      title: "Roster",
+      desc: "Daftar pemain SHIGE CREW.",
+      icon: Users,
+    },
+    {
+      title: "Staff",
+      desc: "Coach, manager, dan official.",
+      icon: Shield,
+    },
+    {
+      title: "Recruitment",
+      desc: "Pendaftaran pemain baru.",
+      icon: UserPlus,
+    },
+    {
+      title: "Articles",
+      desc: "Berita dan artikel tim.",
+      icon: Newspaper,
+    },
+    {
+      title: "Achievements",
+      desc: "Prestasi yang telah diraih.",
+      icon: Trophy,
+    },
+    {
+      title: "Gallery",
+      desc: "Dokumentasi kegiatan tim.",
+      icon: Image,
+    },
+    {
+      title: "Schedule",
+      desc: "Jadwal scrim dan turnamen.",
+      icon: Calendar,
+    },
+    {
+      title: "Sponsors",
+      desc: "Partner resmi SHIGE CREW.",
+      icon: Handshake,
+    },
+  ];
 
-    if (user) {
-
-      navigate(
-        "/home",
-        {
-          replace: true
-        }
-      );
-    }
-
-  }, [navigate]);
+  if (!team) {
+    return (
+      <main className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">
+        Loading...
+      </main>
+    );
+  }
 
   return (
+    <main className="bg-zinc-950 text-white">
 
-    <div className="
-      min-h-screen
-      bg-zinc-950
-      text-white
-    ">
+    <section className="relative overflow-hidden">
 
-      {/* Navbar */}
-      <nav className="
-        flex
-        items-center
-        justify-between
-        px-6
-        py-5
-        border-b
-        border-zinc-800
-      ">
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#7c3aed22,transparent_45%)]" />
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,#9333ea22,transparent_35%)]" />
 
-        <h1 className="
-          text-2xl
-          font-bold
-          text-purple-400
-        ">
-          SHIGEPEDIA
+  <div className="relative max-w-7xl mx-auto px-6 py-28">
+
+    <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+      {/* LEFT */}
+
+      <div>
+
+        <span className="inline-flex rounded-full border border-purple-500/30 bg-purple-500/10 px-4 py-2 text-sm text-purple-400">
+
+          {team.Tagline || "Rise Together"}
+
+        </span>
+
+        <h1 className="mt-8 text-5xl md:text-7xl font-black leading-none">
+
+          {team["Nama Team"]}
+
         </h1>
 
-        <div className="
-          flex
-          gap-3
-        ">
+        <p className="mt-8 max-w-xl text-zinc-400 text-lg leading-8">
 
-          <button
-            onClick={() =>
-              navigate("/login")
-            }
-            className="
-              px-5
-              py-2
-              rounded-xl
-              border
-              border-zinc-700
-              hover:bg-zinc-800
-            "
-          >
-            Login
-          </button>
+          {team.Deskripsi ||
+            "Website resmi SHIGE CREW sedang dalam tahap pengembangan. Nantikan roster, artikel, prestasi, jadwal, dan berbagai fitur menarik lainnya."}
 
-          <button
-            onClick={() =>
-              navigate("/register")
-            }
-            className="
-              px-5
-              py-2
-              rounded-xl
-              bg-purple-600
-              hover:bg-purple-700
-            "
-          >
-            Join Crew
-          </button>
+        </p>
 
-        </div>
+        <div className="flex flex-wrap gap-4 mt-10">
 
-      </nav>
-
-      {/* Hero */}
-      <section className="
-        max-w-7xl
-        mx-auto
-        px-6
-        py-20
-        grid
-        md:grid-cols-2
-        gap-10
-        items-center
-      ">
-
-        <div>
-
-          <p className="
-            text-purple-400
-            mb-3
-          ">
-            🔥 Komunitas Live SHIGE
-          </p>
-
-          <h1 className="
-            text-5xl
-            md:text-6xl
-            font-black
-            leading-tight
-          ">
-            Mabar,
-            <br />
-            Support,
-            <br />
-            & Community
-          </h1>
-
-          <p className="
-            text-zinc-400
-            mt-6
-            text-lg
-          ">
-            Join komunitas SHIGE,
-            Booking Mabar VIP,
-            interactive live tools,
-            top up Mobile Legends,
-            dan leaderboard supporter.
-          </p>
-
-          <div className="
-            flex
-            gap-4
-            mt-8
-          ">
-
-            <button
-              onClick={() =>
-                navigate("/register")
-              }
-              className="
-                bg-purple-600
-                hover:bg-purple-700
-                px-6
-                py-4
-                rounded-2xl
-                font-semibold
-              "
-            >
-              Join SHIGEPEDIA
-            </button>
-
-            <button
-              onClick={() =>
-                navigate("/login")
-              }
-              className="
-                border
-                border-zinc-700
-                hover:bg-zinc-800
-                px-6
-                py-4
-                rounded-2xl
-              "
-            >
-              Login
-            </button>
-
-          </div>
-
-        </div>
-
-        {/* Cards */}
-        <div className="
-          grid
-          gap-4
-        ">
-
-          {/* Mabar VIP */}
           <a
-            href="https://sociabuzz.com/shige/tribe"
-            target="_blank"
-            rel="noreferrer"
-            className="
-              bg-zinc-900
-              border
-              border-zinc-800
-              rounded-3xl
-              p-6
-              hover:bg-zinc-800
-              transition
-            "
+  href="https://docs.google.com/forms/d/e/1FAIpQLSc402BDS4XHutOvUiNLi3d7hO_b-UT7mTlFqvRkdeyX-3U64g/viewform?usp=publish-editor"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-flex items-center justify-center bg-purple-600 hover:bg-purple-700 px-8 py-4 rounded-2xl font-semibold transition-colors"
+>
+  Open Recruitment
+</a>
+
+          <button
+            disabled
+            className="border border-zinc-700 px-8 py-4 rounded-2xl opacity-60 cursor-not-allowed"
           >
+            Roster Coming Soon
+          </button>
 
-            <Gamepad2 className="
-              text-purple-400
-              mb-4
-            " />
+        </div>
 
-            <h3 className="
-              text-xl
-              font-bold
-            ">
-              Mabar VIP
-            </h3>
+      </div>
 
-            <p className="
-              text-zinc-400
-              mt-2
-            ">
-              Main bareng SHIGE,
-              queue realtime,
-              challenge,
-              dan fun match.
-            </p>
+      {/* RIGHT */}
 
-          </a>
+      <div className="flex justify-center">
 
-          {/* TopUp & Lapak */}
-          <div
-            onClick={() =>
-              navigate("/shop")
-            }
-            className="
-              bg-zinc-900
-              border
-              border-zinc-800
-              rounded-3xl
-              p-6
-              hover:bg-zinc-800
-              transition
-              cursor-pointer
-            "
-          >
+        <div className="relative">
 
-            <Coins className="
-              text-purple-400
-              mb-4
-            " />
+          <div className="absolute -inset-6 rounded-full bg-purple-600/20 blur-3xl" />
 
-            <h3 className="
-              text-xl
-              font-bold
-            ">
-              TopUp & Lapak
-            </h3>
+          {team["Logo URL"] ? (
 
-            <p className="
-              text-zinc-400
-              mt-2
-            ">
-              Top up game,
-              beli akun,
-              dan layanan gaming lainnya.
-            </p>
+            <img
+              src={team["Logo URL"]}
+              alt={team["Nama Team"]}
+              className="relative w-80 h-80 object-contain"
+            />
 
-          </div>
+          ) : (
 
-          <div className="
-            grid
-            grid-cols-2
-            gap-4
-          ">
+            <div className="relative w-80 h-80 rounded-full border border-zinc-800 bg-zinc-900 flex items-center justify-center text-7xl font-black text-purple-500">
 
-            {/* WhatsApp Channel */}
-            <a
-              href="https://whatsapp.com/channel/0029VbCMACH1dAwBXkr1md1k"
-              target="_blank"
-              rel="noreferrer"
-              className="
-                bg-zinc-900
-                border
-                border-zinc-800
-                rounded-3xl
-                p-6
-                hover:bg-zinc-800
-                transition
-              "
-            >
-
-              <Users className="
-                text-purple-400
-                mb-4
-              " />
-
-              <h3 className="
-                font-bold
-              ">
-                Whatsapp Channel
-              </h3>
-
-            </a>
-
-            {/* Interactive Live */}
-            <div
-              onClick={() =>
-                navigate("/profile")
-              }
-              className="
-                bg-zinc-900
-                border
-                border-zinc-800
-                rounded-3xl
-                p-6
-                hover:bg-zinc-800
-                transition
-                cursor-pointer
-              "
-            >
-
-              <Radio className="
-                text-purple-400
-                mb-4
-              " />
-
-              <h3 className="
-                font-bold
-              ">
-                Interactive Live
-              </h3>
+              SHIGE
 
             </div>
 
-          </div>
+          )}
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+     {/* ABOUT */}
+
+<section className="max-w-7xl mx-auto px-6 py-20">
+
+  <div className="flex items-center justify-between mb-10">
+
+    <div>
+
+      <h2 className="text-4xl font-bold">
+
+        Team Information
+
+      </h2>
+
+      <p className="text-zinc-500 mt-2">
+
+        Official information about SHIGE CREW.
+
+      </p>
+
+    </div>
+
+  </div>
+
+  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+    <InfoCard
+      title="Team"
+      value={team["Nama Team"]}
+    />
+
+    <InfoCard
+      title="Tagline"
+      value={team.Tagline}
+    />
+
+    <InfoCard
+      title="Founded"
+      value={team.Berdiri}
+    />
+
+    <InfoCard
+      title="Region"
+      value={team.Region}
+    />
+
+  </div>
+
+</section>
+
+      {/* EXPLORE */}
+
+      <section className="max-w-7xl mx-auto px-6 py-16">
+
+        <h2 className="text-3xl font-bold mb-10">
+          Explore
+        </h2>
+
+        <p className="text-zinc-500 mt-3 max-w-xl">
+        Kami sedang mengembangkan berbagai fitur agar website menjadi pusat informasi resmi SHIGE CREW.
+    </p>
+
+        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+          {features.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <div
+                key={item.title}
+                className="relative rounded-3xl border border-zinc-800 bg-zinc-900 p-8 opacity-60 cursor-not-allowed"
+              >
+
+                <span className="absolute top-4 right-4 text-xs bg-purple-600 px-2 py-1 rounded-full">
+                  Coming Soon
+                </span>
+
+               <Icon
+    size={34}
+    className="text-purple-400 group-hover:scale-110 transition"
+/>
+                <h3 className="font-bold text-xl">
+                  {item.title}
+                </h3>
+
+                <p className="text-zinc-400 mt-3">
+                  {item.desc}
+                </p>
+
+                <ChevronRight className="mt-8 text-zinc-500" />
+
+              </div>
+            );
+          })}
 
         </div>
 
       </section>
 
-      {/* Footer */}
-      <footer className="
-        border-t
-        border-zinc-800
-        text-center
-        py-6
-        text-zinc-500
-      ">
-        © 2026 SHIGEPEDIA • Built for SHIGE Crew 🔥
-      </footer>
+    </main>
+  );
+}
+function InfoCard({ title, value }) {
+  return (
+    <div className="group rounded-3xl border border-zinc-800 bg-zinc-900/70 backdrop-blur-sm p-6 hover:border-purple-500 transition">
+      
+
+      <p className="text-xs uppercase tracking-[0.25em] text-purple-400">
+
+        {title}
+
+      </p>
+
+      <p className="mt-4 text-2xl font-bold">
+
+        {value || "-"}
+
+      </p>
 
     </div>
   );
