@@ -1,116 +1,161 @@
-
 import {
-  useNavigate,
-} from "react-router-dom";
+  Gamepad2,
+  MapPin,
+  Calendar,
+  Globe,
+ 
+  Users,
+  ExternalLink,
+} from "lucide-react";
 
 export default function Footer() {
-
-  const navigate =
-    useNavigate();
-
   return (
-    <footer className="mt-16 border-t border-zinc-800 bg-zinc-950">
+    <footer className="border-t border-zinc-800 bg-zinc-950 text-zinc-400">
 
-      <div className="max-w-7xl mx-auto px-6 py-10">
+      <div className="max-w-7xl mx-auto px-6 py-16">
 
-        <div className="grid md:grid-cols-3 gap-10">
+        <div className="grid gap-12 lg:grid-cols-4">
 
           {/* Brand */}
           <div>
 
-            <h2 className="text-2xl font-black text-purple-400">
-              SHIGEPEDIA
+            <h2 className="text-3xl font-black text-white">
+              SHIGE
+              <span className="text-purple-500"> CREW</span>
             </h2>
 
-            <p className="text-zinc-400 mt-3 leading-relaxed">
-              Ecosystem resmi
-              SHIGE Crew untuk
-              mabar, support,
-              top up, leaderboard,
-              dan komunitas.
+            <p className="mt-5 leading-8">
+              Rise Together. Play Beyond.
+            </p>
+
+            <p className="mt-4 text-sm leading-7">
+              Komunitas dan tim esports di bawah naungan
+              <span className="text-white font-semibold">
+                {" "}Shigepedia {" "}
+              </span>
+              yang berfokus pada pengembangan pemain melalui latihan,
+              kompetisi, dan komunitas yang positif.
             </p>
 
           </div>
 
-          {/* Navigation */}
+          {/* Organization */}
+
           <div>
 
-            <h3 className="font-semibold text-white mb-4">
-              Quick Access
+            <h3 className="font-bold text-white text-lg">
+              Organization
             </h3>
 
-            <div className="flex flex-col gap-3 text-zinc-400">
+            <div className="mt-6 space-y-4">
 
-              <button
-                onClick={() =>
-                  navigate(
-                    "/profile"
-                  )
-                }
-                className="text-left hover:text-purple-400 transition"
-              >
-                Interactive Live
-              </button>
+              <div className="flex gap-3">
+                <Users size={18} className="text-purple-400 mt-1" />
+                <div>
+                  <p className="text-white">Founder</p>
+                  <p>Gabriel Mohammad (SHIGE)</p>
+                </div>
+              </div>
 
-              <button
-                onClick={() =>
-                  navigate(
-                    "/stall"
-                  )
-                }
-                className="text-left hover:text-purple-400 transition"
-              >
-                TopUp & Lapak
-              </button>
+              <div className="flex gap-3">
+                <Gamepad2 size={18} className="text-purple-400 mt-1" />
+                <div>
+                  <p className="text-white">Organization</p>
+                  <p>Shigepedia</p>
+                </div>
+              </div>
 
-              <button
-                onClick={() =>
-                  window.open(
-                    "https://sociabuzz.com/shige/tribe",
-                    "_blank"
-                  )
-                }
-                className="text-left hover:text-purple-400 transition"
-              >
-                Mabar VIP
-              </button>
+              <div className="flex gap-3">
+                <Calendar size={18} className="text-purple-400 mt-1" />
+                <div>
+                  <p className="text-white">Founded</p>
+                  <p>2026</p>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <MapPin size={18} className="text-purple-400 mt-1" />
+                <div>
+                  <p className="text-white">Region</p>
+                  <p>Indonesia (Online Community)</p>
+                </div>
+              </div>
 
             </div>
 
           </div>
 
-          {/* Community */}
+          {/* Navigation */}
+
           <div>
 
-            <h3 className="font-semibold text-white mb-4">
-              Community
+            <h3 className="font-bold text-white text-lg">
+              Navigation
             </h3>
 
-            <div className="flex flex-col gap-3 text-zinc-400">
+            <div className="mt-6 flex flex-col gap-3">
 
-              <button
-                onClick={() =>
-                  window.open(
-                    "https://whatsapp.com/channel/0029VbCMACH1dAwBXkr1md1k",
-                    "_blank"
-                  )
-                }
-                className="text-left hover:text-purple-400 transition"
-              >
-                Whatsapp Channel
-              </button>
+              <a href="/" className="hover:text-purple-400 transition">
+                Home
+              </a>
 
-              <button
-                onClick={() =>
-                  window.open(
-                    "https://sociabuzz.com/shige",
-                    "_blank"
-                  )
-                }
-                className="text-left hover:text-purple-400 transition"
+              <a href="/about" className="hover:text-purple-400 transition">
+                About Us
+              </a>
+
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSc402BDS4XHutOvUiNLi3d7hO_b-UT7mTlFqvRkdeyX-3U64g/viewform?usp=publish-editor"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-purple-400 transition"
               >
-                Support SHIGE
-              </button>
+                Join SHIGE CREW
+              </a>
+
+              <a
+                href="https://shigepedia.id"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-purple-400 transition"
+              >
+                Top Up Game
+              </a>
+
+              <a
+                href="https://sociabuzz.com/shige/tribe"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-purple-400 transition"
+              >
+                Mabar VIP
+              </a>
+
+            </div>
+
+          </div>
+
+          {/* Contact */}
+
+          <div>
+
+            <h3 className="font-bold text-white text-lg">
+              Official Links
+            </h3>
+
+            <div className="mt-6 space-y-4">
+
+              <a
+                href="https://shigepedia.id"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 hover:text-purple-400 transition"
+              >
+                <Globe size={18} />
+                shigepedia.id
+                <ExternalLink size={14} />
+              </a>
+
+             
 
             </div>
 
@@ -119,20 +164,20 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-zinc-800 mt-8 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
 
-          <p className="text-zinc-500 text-sm">
-            © 2026 SHIGEPEDIA •
-            Built for SHIGE Crew 🔥
+        <div className="mt-14 border-t border-zinc-800 pt-8 flex flex-col md:flex-row justify-between gap-4">
+
+          <p>
+            © {new Date().getFullYear()} SHIGE CREW.
+            All Rights Reserved.
           </p>
 
-          <div className="flex items-center gap-2 text-xs text-zinc-500">
-
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-
-            All systems online
-
-          </div>
+          <p>
+            Powered by
+            <span className="text-purple-400 font-semibold">
+              {" "}Shigepedia
+            </span>
+          </p>
 
         </div>
 
@@ -141,4 +186,3 @@ export default function Footer() {
     </footer>
   );
 }
-

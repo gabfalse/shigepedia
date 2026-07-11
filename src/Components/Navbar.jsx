@@ -1,395 +1,145 @@
-import LogoUngu
-  from "../../src/assets/Logo Ungu.png";
-
+import { useState } from "react";
 import {
-  LogOut,
   Menu,
   X,
-  Trophy,
-  LayoutGrid,
-  User,
+  Gamepad2,
+  ArrowUpRight,
 } from "lucide-react";
 
-import {
-  useNavigate
-} from "react-router-dom";
+const RECRUITMENT_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSc402BDS4XHutOvUiNLi3d7hO_b-UT7mTlFqvRkdeyX-3U64g/viewform?usp=publish-editor";
 
-import {
-  useState
-} from "react";
+const navItems = [
+  {
+    title: "Home",
+    href: "/",
+  },
+  {
+    title: "About",
+    href: "/about",
+  },
+  {
+    title: "Top Up",
+    href: "https://shigepedia.id",
+    external: true,
+  },
+  {
+    title: "Mabar VIP",
+    href: "https://sociabuzz.com/shige/tribe",
+    external: true,
+  },
+];
 
 export default function Navbar() {
-
-  const navigate =
-    useNavigate();
-
-  const [
-    openMenu,
-    setOpenMenu
-  ] = useState(false);
-
-  // ======================
-  // Logout
-  // ======================
-  const handleLogout =
-    () => {
-
-      localStorage.removeItem(
-        "user"
-      );
-
-      localStorage.removeItem(
-        "token"
-      );
-
-      navigate(
-        "/login"
-      );
-    };
-
-  const menus = [
-
-    // {
-    //   title:
-    //     "Features",
-
-    //   icon:
-    //     LayoutGrid,
-
-    //   action:
-    //     () => {
-
-    //       navigate("/");
-
-    //       setOpenMenu(false);
-    //     }
-    // },
-
-    {
-      title:
-        "Leaderboard",
-
-      icon:
-        Trophy,
-
-      action:
-        () => {
-
-          navigate(
-            "/leaderboard"
-          );
-
-          setOpenMenu(false);
-        }
-    },
-
-    {
-      title:
-        "Profile",
-
-      icon:
-        User,
-
-      action:
-        () => {
-
-          navigate(
-            "/profile"
-          );
-
-          setOpenMenu(false);
-        }
-    },
-  ];
+  const [open, setOpen] = useState(false);
 
   return (
+    <header className="sticky top-0 z-50 border-b border-zinc-800/70 bg-zinc-950/80 backdrop-blur-xl">
 
-    <nav className="
-      fixed
-      top-0
-      left-0
-      w-full
-      z-50
-      border-b
-      border-purple-500/10
-      bg-zinc-950/70
-      backdrop-blur-xl
-    ">
-
-      <div className="
-        max-w-7xl
-        mx-auto
-        h-16
-        px-4
-        md:px-6
-        flex
-        items-center
-        justify-between
-      ">
+      <div className="max-w-7xl mx-auto h-20 px-6 flex items-center justify-between">
 
         {/* Logo */}
-        <div
-          onClick={() =>
-            navigate("/")
-          }
-          className="
-            flex
-            items-center
-            gap-0
-            cursor-pointer
-            select-none
-          "
+
+        <a
+          href="/"
+          className="flex items-center gap-3"
         >
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-purple-600">
+            <Gamepad2 size={22} className="text-white" />
+          </div>
 
-          <img
-            src={LogoUngu}
-            alt="SHIGEPEDIA Logo"
-            className="
-              w-14
-              h-14
-              md:w-16
-              md:h-16
-              mt-2
-              object-contain
-            "
-          />
+          <div>
+            <h2 className="font-black text-xl text-white">
+              SHIGE CREW
+            </h2>
 
-          <h1 className="
-            text-xl
-            md:text-2xl
-            font-black
-            tracking-wide
-            text-white
-          ">
-            SHIGE
+            <p className="text-xs text-zinc-500">
+              Rise Together. Play Beyond.
+            </p>
+          </div>
+        </a>
 
-            <span className="
-              text-purple-400
-            ">
-              PEDIA
-            </span>
-          </h1>
+        {/* Desktop */}
 
-        </div>
+        <nav className="hidden lg:flex items-center gap-8">
 
-        {/* Desktop Menu */}
-        <div className="
-          hidden
-          md:flex
-          items-center
-          gap-8
-          text-zinc-300
-          font-medium
-        ">
+          {navItems.map((item) => (
+            <a
+              key={item.title}
+              href={item.href}
+              target={item.external ? "_blank" : "_self"}
+              rel={item.external ? "noopener noreferrer" : ""}
+              className="text-zinc-300 hover:text-purple-400 transition"
+            >
+              {item.title}
+            </a>
+          ))}
 
-          {menus.map(
-            (
-              item,
-              index
-            ) => (
+        </nav>
 
-              <button
-                key={index}
-                onClick={
-                  item.action
-                }
-                className="
-                  hover:text-purple-400
-                  transition
-                "
-              >
-                {
-                  item.title
-                }
-              </button>
-            )
-          )}
+        {/* Desktop Button */}
 
-        </div>
+        <div className="hidden lg:block">
 
-        {/* Right Side */}
-        <div className="
-          flex
-          items-center
-          gap-3
-        ">
-
-          {/* Logout Desktop */}
-          <button
-            onClick={
-              handleLogout
-            }
-            className="
-              hidden
-              md:flex
-              items-center
-              gap-2
-              px-4
-              py-2
-              rounded-xl
-              border
-              border-red-500/20
-              bg-red-500/10
-              text-red-400
-              hover:bg-red-500/20
-              transition
-            "
+          <a
+            href={RECRUITMENT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl bg-purple-600 hover:bg-purple-700 transition px-5 py-3 font-semibold"
           >
+            Join Team
 
-            <LogOut
-              size={18}
-            />
+            <ArrowUpRight size={18} />
 
-            <span className="
-              font-medium
-            ">
-              Logout
-            </span>
-
-          </button>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() =>
-              setOpenMenu(
-                !openMenu
-              )
-            }
-            className="
-              md:hidden
-              w-11
-              h-11
-              rounded-xl
-              border
-              border-zinc-800
-              bg-zinc-900
-              flex
-              items-center
-              justify-center
-              text-zinc-300
-            "
-          >
-
-            {openMenu ? (
-
-              <X size={22} />
-
-            ) : (
-
-              <Menu size={22} />
-
-            )}
-
-          </button>
+          </a>
 
         </div>
+
+        {/* Mobile */}
+
+        <button
+          onClick={() => setOpen(!open)}
+          className="lg:hidden"
+        >
+          {open ? <X size={30} /> : <Menu size={30} />}
+        </button>
 
       </div>
 
-      {/* MOBILE MENU */}
-      {openMenu && (
+      {/* Mobile Menu */}
 
-        <div className="
-          md:hidden
-          border-t
-          border-zinc-800
-          bg-zinc-950/95
-          backdrop-blur-xl
-          px-4
-          py-4
-          space-y-2
-        ">
+      {open && (
+        <div className="lg:hidden border-t border-zinc-800 bg-zinc-950">
 
-          {menus.map(
-            (
-              item,
-              index
-            ) => {
+          <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-5">
 
-              const Icon =
-                item.icon;
+            {navItems.map((item) => (
+              <a
+                key={item.title}
+                href={item.href}
+                target={item.external ? "_blank" : "_self"}
+                rel={item.external ? "noopener noreferrer" : ""}
+                className="text-zinc-300 hover:text-purple-400 transition"
+                onClick={() => setOpen(false)}
+              >
+                {item.title}
+              </a>
+            ))}
 
-              return (
+            <a
+              href={RECRUITMENT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 rounded-xl bg-purple-600 px-5 py-3 text-center font-semibold hover:bg-purple-700 transition"
+            >
+              Join Team
+            </a>
 
-                <button
-                  key={index}
-                  onClick={
-                    item.action
-                  }
-                  className="
-                    w-full
-                    flex
-                    items-center
-                    gap-3
-                    rounded-2xl
-                    border
-                    border-zinc-800
-                    bg-zinc-900
-                    px-4
-                    py-4
-                    text-left
-                    text-zinc-300
-                    hover:border-purple-500/30
-                    hover:text-purple-400
-                    transition-all
-                  "
-                >
-
-                  <Icon
-                    size={20}
-                  />
-
-                  <span className="
-                    font-medium
-                  ">
-                    {
-                      item.title
-                    }
-                  </span>
-
-                </button>
-              );
-            }
-          )}
-
-          {/* Logout Mobile */}
-          <button
-            onClick={
-              handleLogout
-            }
-            className="
-              w-full
-              flex
-              items-center
-              gap-3
-              rounded-2xl
-              border
-              border-red-500/20
-              bg-red-500/10
-              px-4
-              py-4
-              text-left
-              text-red-400
-              hover:bg-red-500/20
-              transition-all
-            "
-          >
-
-            <LogOut
-              size={20}
-            />
-
-            <span className="
-              font-medium
-            ">
-              Logout
-            </span>
-
-          </button>
+          </div>
 
         </div>
       )}
 
-    </nav>
+    </header>
   );
 }
