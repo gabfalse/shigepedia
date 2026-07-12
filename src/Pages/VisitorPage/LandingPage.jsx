@@ -4,8 +4,7 @@ import Papa from "papaparse";
 const TEAM_CSV =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLiZZJKJV_Z8grC-XL3dRakvDtCmyzhY6-G2OpnonhIceiIeHBW9d_olssQJ3EoPp5ptwpFelfMZ6f/pub?gid=1932849059&single=true&output=csv";
 
-const RECRUITMENT_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSc402BDS4XHutOvUiNLi3d7hO_b-UT7mTlFqvRkdeyX-3U64g/viewform?usp=publish-editor";
+
 
 export default function LandingHero() {
   const [team, setTeam] = useState(null);
@@ -84,16 +83,11 @@ export default function LandingHero() {
 
   <div className="mt-10 flex flex-wrap justify-center lg:justify-start gap-4">
 
-    <a
-      href="/about"
-      className="rounded-2xl border border-zinc-700 px-6 py-3 font-semibold hover:border-purple-500 hover:text-purple-400 transition"
-    >
-      Tentang SHIGE CREW
-    </a>
+ 
 
     <a
-      href={RECRUITMENT_URL}
-      target="_blank"
+      href="/about"
+      
       rel="noopener noreferrer"
       className="rounded-2xl bg-purple-600 hover:bg-purple-700 px-6 py-3 font-semibold transition"
     >
