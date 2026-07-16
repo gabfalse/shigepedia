@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 
 const RECRUITMENT_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSc402BDS4XHutOvUiNLi3d7hO_b-UT7mTlFqvRkdeyX-3U64g/viewform?usp=publish-editor";
+  "https://discord.gg/2ckrxv9yGQ";
 
 const navItems = [
   {

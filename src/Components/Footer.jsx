@@ -104,7 +104,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSc402BDS4XHutOvUiNLi3d7hO_b-UT7mTlFqvRkdeyX-3U64g/viewform?usp=publish-editor"
+                href="https://discord.gg/2ckrxv9yGQ"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-purple-400 transition"
