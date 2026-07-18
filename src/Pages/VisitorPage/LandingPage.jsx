@@ -74,12 +74,12 @@ export default function LandingHero() {
 
            <div className="mt-10 flex flex-wrap justify-center gap-4 lg:justify-start">
   <a
-    href="https://discord.gg/2ckrxv9yGQ"
-    target="_blank"
+    href="/about"
+    
     rel="noopener noreferrer"
     className="rounded-2xl bg-purple-600 px-6 py-3 font-semibold transition hover:bg-purple-700"
   >
-    Join Discord
+    Join Team
   </a>
 
   <a

@@ -3,8 +3,8 @@ import { CalendarDays, Clock3 } from "lucide-react";
 const schedules = [
   {
     activity: "Latihan Tim",
-    day: "Selasa & Jumat",
-    time: "19.30 - 22.00 WIB",
+    day: "Hari Jum'at",
+    time: "19.30 - 20.30 WIB",
   },
   {
     activity: "Scrim",
@@ -13,8 +13,8 @@ const schedules = [
   },
   {
     activity: "Mabar Komunitas",
-    day: "Minggu",
-    time: "20.00 WIB",
+    day: "Setiap Hari",
+    time: "17.30 WIB",
   },
   {
     activity: "Meeting",

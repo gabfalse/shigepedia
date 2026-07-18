@@ -1,7 +1,7 @@
 import { ArrowRight, Gamepad2 } from "lucide-react";
 
 const RECRUITMENT_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSc402BDS4XHutOvUiNLi3d7hO_b-UT7mTlFqvRkdeyX-3U64g/viewform?usp=publish-editor";
+  "https://discord.gg/2ckrxv9yGQ";
 
 export default function AboutHero() {
   return (
@@ -33,14 +33,14 @@ export default function AboutHero() {
           </span>
         </h1>
 
-        {/* Description */}
+        {/* Description
         <p className="mt-8 max-w-3xl text-lg leading-9 text-zinc-400">
           SHIGE CREW merupakan komunitas dan tim esports di bawah naungan
           <span className="font-semibold text-white"> Shigepedia</span> yang
           berfokus pada pengembangan pemain, membangun komunitas yang sehat,
           serta menciptakan kesempatan bagi talenta muda untuk berkembang
           melalui latihan, kompetisi, dan kolaborasi.
-        </p>
+        </p> */}
 
         {/* CTA */}
         <div className="mt-10 flex flex-wrap gap-4">

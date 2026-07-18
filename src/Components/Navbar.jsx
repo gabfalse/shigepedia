@@ -82,8 +82,8 @@ export default function Navbar() {
         <div className="hidden lg:block">
 
           <a
-            href={RECRUITMENT_URL}
-            target="_blank"
+            href="/about"
+           
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-xl bg-purple-600 hover:bg-purple-700 transition px-5 py-3 font-semibold"
           >

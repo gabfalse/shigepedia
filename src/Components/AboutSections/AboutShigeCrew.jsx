@@ -18,7 +18,7 @@ export default function AboutShigeCrew() {
             <span className="font-semibold text-white">
               SHIGE CREW
             </span>{" "}
-            adalah komunitas dan tim esports yang dibangun di bawah naungan{" "}
+            adalah komunitas dan tim esports Mobile Legends yang dibangun di bawah naungan{" "}
             <span className="text-purple-400 font-semibold">
               Shigepedia
             </span>{" "}
