@@ -5,16 +5,6 @@ import DiscordCard from "../../Components/HomeComponents/Discordcard";
 const TEAM_CSV =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLiZZJKJV_Z8grC-XL3dRakvDtCmyzhY6-G2OpnonhIceiIeHBW9d_olssQJ3EoPp5ptwpFelfMZ6f/pub?gid=1932849059&single=true&output=csv";
 
-const getImageUrl = (url) => {
-  if (!url) return "";
-
-  const fileId = url.match(/\/d\/([^/]+)/)?.[1];
-
-  return fileId
-    ? `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`
-    : url;
-};
-
 export default function LandingHero() {
   const [team, setTeam] = useState(null);
   const [error, setError] = useState(false);
@@ -37,7 +27,7 @@ export default function LandingHero() {
 
   if (error) {
     return (
-      <section className="min-h-screen flex items-center justify-center bg-zinc-950 text-zinc-400">
+      <section className="flex min-h-screen items-center justify-center bg-zinc-950 text-zinc-400">
         Failed to load team information.
       </section>
     );
@@ -45,7 +35,7 @@ export default function LandingHero() {
 
   if (!team) {
     return (
-      <section className="min-h-screen flex items-center justify-center bg-zinc-950 text-white">
+      <section className="flex min-h-screen items-center justify-center bg-zinc-950 text-white">
         Loading...
       </section>
     );
@@ -53,76 +43,87 @@ export default function LandingHero() {
 
   return (
     <section className="relative overflow-hidden bg-zinc-950 text-white">
+      {/* Background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#7c3aed25,transparent_45%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,#9333ea20,transparent_35%)]" />
 
-      <div className="relative mx-auto max-w-7xl px-6 py-28">
-        <div className="grid items-center gap-16 lg:grid-cols-2">
-          {/* Left */}
+      <div className="relative mx-auto max-w-7xl px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-20">
+          {/* LEFT */}
           <div className="text-center lg:text-left">
             <span className="inline-flex rounded-full border border-purple-500/30 bg-purple-500/10 px-4 py-2 text-sm text-purple-400">
               {team.Tagline || "Rise Together"}
             </span>
 
-            <h1 className="mt-6 text-5xl font-black leading-tight sm:text-6xl lg:text-7xl">
+            <h1 className="mt-5 text-4xl font-black leading-tight sm:text-5xl lg:text-7xl">
               {team["Nama Team"] || "SHIGE CREW"}
             </h1>
 
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-zinc-400 lg:mx-0">
-              {team.Deskripsi || "Professional esports community."}
+            <p className="mx-auto mt-6 max-w-lg text-base leading-8 text-zinc-400 lg:mx-0 lg:text-lg">
+              {team.Deskripsi ||
+                "Professional esports community that grows together, competes together, and creates unforgettable gaming experiences."}
             </p>
 
-           <div className="mt-10 flex flex-wrap justify-center gap-4 lg:justify-start">
+            {/* Buttons */}
+            <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
+  {/* Join Team */}
   <a
     href="/about"
-    
-    rel="noopener noreferrer"
-    className="rounded-2xl bg-purple-600 px-6 py-3 font-semibold transition hover:bg-purple-700"
+    className="inline-flex w-full items-center justify-center rounded-2xl bg-purple-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-purple-700 sm:w-auto"
   >
     Join Team
   </a>
 
+  {/* Mabar */}
   <a
     href="https://sociabuzz.com/shige/tribe"
     target="_blank"
     rel="noopener noreferrer"
-    className="rounded-2xl border border-zinc-700 px-6 py-3 font-semibold transition hover:border-purple-500 hover:text-purple-400"
+    className="inline-flex w-full items-center justify-center rounded-2xl border border-sky-500 bg-sky-500/10 px-6 py-3 text-sm font-semibold text-sky-400 transition hover:bg-sky-500 hover:text-white sm:w-auto"
   >
-    Mabar with SHIGE
+    🎮 Mabar VIP
   </a>
 
+  {/* Top Up */}
   <a
     href="https://shigepedia.id"
     target="_blank"
     rel="noopener noreferrer"
-    className="rounded-2xl border border-zinc-700 px-6 py-3 font-semibold transition hover:border-purple-500 hover:text-purple-400"
+    className="inline-flex w-full items-center justify-center rounded-2xl border border-pink-500 bg-pink-500/10 px-6 py-3 text-sm font-semibold text-pink-400 transition hover:bg-pink-500 hover:text-white sm:w-auto"
   >
-    Top Up Game
+    💎 Top Up Game
+  </a>
+
+  {/* Joki */}
+  <a
+    href="/joki"
+    className="inline-flex w-full items-center justify-center rounded-2xl border border-amber-500 bg-amber-500/10 px-6 py-3 text-sm font-semibold text-amber-400 transition hover:bg-amber-500 hover:text-black sm:w-auto"
+  >
+    🏆 Joki MLBB
+  </a>
+
+  {/* Contact */}
+  <a
+    href="https://wa.me/6285162651533"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex w-full items-center justify-center rounded-2xl border border-emerald-500 bg-emerald-500/10 px-6 py-3 text-sm font-semibold text-emerald-400 transition hover:bg-emerald-500 hover:text-white sm:w-auto"
+  >
+    💬 Contact Admin
   </a>
 </div>
           </div>
 
-          {/* Right */}
-          <div className="flex justify-center">
-            <div className="relative">
-              <div className="absolute -inset-10 rounded-full bg-purple-600/20 blur-3xl" />
+          {/* RIGHT */}
+          <div className="flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-md">
+              {/* Glow */}
+              <div className="absolute inset-0 rounded-[40px] bg-purple-600/20 blur-3xl" />
 
-              {team["Logo URL"] ? (
-                <img
-                  src={getImageUrl(team["Logo URL"])}
-                  alt={team["Nama Team"]}
-                  loading="lazy"
-                  decoding="async"
-                  draggable={false}
-                  className="relative z-10 h-64 w-64 select-none object-contain sm:h-80 sm:w-80 lg:h-[420px] lg:w-[420px]"
-                />
-              ) : (
-                <div className="relative z-10 flex h-64 w-64 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900 text-6xl font-black text-purple-500 sm:h-80 sm:w-80 lg:h-[420px] lg:w-[420px]">
-                  LOGO
-                </div>
-              )}
-
-              <DiscordCard />
+              {/* Discord Card */}
+              <div className="relative transition duration-500 hover:-translate-y-1">
+                <DiscordCard />
+              </div>
             </div>
           </div>
         </div>
