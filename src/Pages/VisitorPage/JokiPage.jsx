@@ -27,10 +27,26 @@ export default function JokiPage() {
   ];
 
   const features = [
-    "⚡ Fast Process",
-    "🔒 100% Aman",
-    "🎮 Dikerjakan Player Berpengalaman",
-    "🛡️ Garansi Sesuai Kesepakatan",
+    {
+      icon: "⚡",
+      title: "Fast Process",
+      desc: "Pengerjaan cepat sesuai antrean."
+    },
+    {
+      icon: "🔒",
+      title: "100% Safe",
+      desc: "Akun aman & privasi terjaga."
+    },
+    {
+      icon: "🎮",
+      title: "Pro Player",
+      desc: "Dikerjakan player berpengalaman."
+    },
+    {
+      icon: "🛡️",
+      title: "Warranty",
+      desc: "Garansi sesuai kesepakatan."
+    }
   ];
 
   const rules = [
@@ -43,217 +59,451 @@ export default function JokiPage() {
   ];
 
   return (
-    <section className="min-h-screen bg-zinc-950 text-white">
-      {/* Hero */}
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#7c3aed20,transparent_45%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,#9333ea20,transparent_35%)]" />
+    <section className="relative min-h-screen overflow-hidden bg-zinc-950 text-white">
 
-        <div className="relative mx-auto max-w-7xl px-5 py-20 text-center">
-          <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-2 text-sm text-amber-400">
-            SHIGE CREW
+      {/* Background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#2563eb33,transparent_45%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,#7c3aed33,transparent_45%)]" />
+
+      <div className="absolute -left-40 top-0 h-96 w-96 rounded-full bg-cyan-500/20 blur-[140px]" />
+
+      <div className="absolute -right-40 bottom-0 h-[28rem] w-[28rem] rounded-full bg-violet-500/20 blur-[160px]" />
+
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.03)_1px,transparent_1px)] bg-[size:48px_48px] opacity-20" />
+
+      {/* ================= HERO ================= */}
+
+      <div className="relative mx-auto max-w-7xl px-5 py-24">
+
+        <div className="mx-auto max-w-4xl text-center">
+
+          <span className="inline-flex rounded-full border border-cyan-400/20 bg-cyan-500/10 px-5 py-2 text-sm font-semibold tracking-wider text-cyan-300">
+            ⚔ SHIGE BOOSTING SERVICE
           </span>
 
-          <h1 className="mt-6 text-5xl font-black md:text-7xl">
+          <h1 className="mt-8 bg-gradient-to-r from-cyan-300 via-white to-violet-300 bg-clip-text text-6xl font-black text-transparent md:text-8xl">
             JOKI BY SHIGE
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
-            Naik rank lebih cepat bersama player berpengalaman.
-            Aman, cepat, profesional, dan bergaransi.
+          <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-zinc-400">
+            Push rank lebih cepat bersama player berpengalaman.
+            Aman, cepat, profesional, dan bergaransi dengan
+            proses yang transparan.
           </p>
 
-          <a
-            href="https://wa.me/6285162651533"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-flex rounded-xl bg-green-600 px-7 py-3 font-semibold transition hover:bg-green-700"
-          >
-            Order Sekarang
-          </a>
-        </div>
-      </div>
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
 
-      {/* Features */}
-      <div className="mx-auto grid max-w-6xl gap-6 px-5 md:grid-cols-2 lg:grid-cols-4">
-        {features.map((item) => (
-          <div
-            key={item}
-            className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6 text-center"
-          >
-            <h3 className="font-semibold text-purple-400">{item}</h3>
+            <a
+              href="https://wa.me/6285162651533"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-4 font-bold transition hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(34,211,238,.4)]"
+            >
+              ⚡ ORDER SEKARANG
+            </a>
+
+            <a
+              href="#harga"
+              className="rounded-2xl border border-white/10 bg-white/5 px-8 py-4 font-semibold backdrop-blur transition hover:border-cyan-400"
+            >
+              💎 Lihat Harga
+            </a>
+
           </div>
-        ))}
+
+          {/* Stats */}
+
+          <div className="mt-16 grid gap-5 sm:grid-cols-3">
+
+            <div className="rounded-3xl border border-cyan-500/20 bg-white/5 p-6 backdrop-blur">
+
+              <h3 className="text-4xl font-black text-cyan-300">
+                1000+
+              </h3>
+
+              <p className="mt-2 text-sm text-zinc-400">
+                Completed Orders
+              </p>
+
+            </div>
+
+            <div className="rounded-3xl border border-violet-500/20 bg-white/5 p-6 backdrop-blur">
+
+              <h3 className="text-4xl font-black text-violet-300">
+                24/7
+              </h3>
+
+              <p className="mt-2 text-sm text-zinc-400">
+                Online Support
+              </p>
+
+            </div>
+
+            <div className="rounded-3xl border border-green-500/20 bg-white/5 p-6 backdrop-blur">
+
+              <h3 className="text-4xl font-black text-green-300">
+                100%
+              </h3>
+
+              <p className="mt-2 text-sm text-zinc-400">
+                Safe Service
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
 
-      {/* Harga Per Star */}
-      <div className="mx-auto max-w-6xl px-5 py-20">
-        <h2 className="mb-10 text-center text-4xl font-black">
+      {/* ================= FEATURES ================= */}
+
+      <div className="relative mx-auto grid max-w-7xl gap-6 px-5 md:grid-cols-2 lg:grid-cols-4">
+
+        {features.map((item) => (
+
+          <div
+            key={item.title}
+            className="group relative overflow-hidden rounded-3xl border border-cyan-500/20 bg-gradient-to-b from-zinc-900 to-zinc-950 p-7 transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400 hover:shadow-[0_0_30px_rgba(34,211,238,.25)]"
+          >
+
+            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500" />
+
+            <div className="text-5xl">
+              {item.icon}
+            </div>
+
+            <h3 className="mt-5 text-xl font-bold">
+              {item.title}
+            </h3>
+
+            <p className="mt-3 text-sm leading-7 text-zinc-400">
+              {item.desc}
+            </p>
+
+          </div>
+
+        ))}
+
+      </div>
+
+      {/* ================= HARGA PER STAR ================= */}
+
+      <div
+        id="harga"
+        className="mx-auto max-w-7xl px-5 py-24"
+      >
+
+        <h2 className="mb-12 text-center text-5xl font-black">
           Harga Per Star
         </h2>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {prices.map((item) => (
-            <div
-              key={item.rank}
-              className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 p-6 transition duration-300 hover:-translate-y-1 hover:border-purple-500"
-            >
-              {item.discount && (
-                <div className="absolute right-0 top-0 rounded-bl-xl bg-red-500 px-3 py-1 text-xs font-bold text-white">
-                  -{item.discount}
-                </div>
-              )}
+  <div
+    key={item.rank}
+    className="group relative overflow-hidden rounded-3xl border border-cyan-500/20 bg-gradient-to-b from-zinc-900 to-zinc-950 p-6 transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400 hover:shadow-[0_0_40px_rgba(34,211,238,.25)]"
+  >
+    {/* Glow */}
+    <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500" />
 
-              {item.badge && (
-                <div className="mb-3 inline-flex rounded-full bg-yellow-500/10 px-3 py-1 text-xs font-semibold text-yellow-400">
-                  ⭐ {item.badge}
-                </div>
-              )}
+    {/* Discount */}
+    {item.discount && (
+      <div className="absolute right-0 top-0 rounded-bl-2xl bg-gradient-to-r from-red-500 to-pink-500 px-4 py-2 text-xs font-black tracking-wider text-white">
+        -{item.discount}
+      </div>
+    )}
 
-              <h3 className="text-xl font-bold text-purple-400">
-                {item.rank}
-              </h3>
+    {/* Badge */}
+    {item.badge && (
+      <span className="mb-4 inline-flex rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1 text-xs font-bold tracking-wider text-yellow-300">
+        🏆 {item.badge}
+      </span>
+    )}
 
-              {item.oldPrice && (
-                <p className="mt-4 text-sm text-zinc-500 line-through">
-                  {item.oldPrice}
-                </p>
-              )}
+    <h3 className="mt-2 text-2xl font-black text-cyan-300">
+      {item.rank}
+    </h3>
 
-              <p className="text-3xl font-black">{item.price}</p>
+    <p className="mt-5 text-xs uppercase tracking-[0.25em] text-zinc-500">
+      Current Price
+    </p>
 
-              <span className="mt-4 inline-flex rounded-full bg-purple-500/10 px-3 py-1 text-xs text-purple-300">
-                Promo Terbatas
-              </span>
-            </div>
-          ))}
+    {item.oldPrice && (
+      <p className="mt-2 text-sm text-red-400/70 line-through">
+        {item.oldPrice}
+      </p>
+    )}
+
+    <p className="mt-2 text-4xl font-black text-white">
+      {item.price}
+    </p>
+
+    <div className="mt-6 h-px bg-zinc-800" />
+
+    <div className="mt-5 flex items-center justify-between">
+
+      <span className="rounded-full bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-300">
+        Ready
+      </span>
+
+      <a
+        href="https://wa.me/6285162651533"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-sm font-semibold text-cyan-300 transition hover:text-cyan-200"
+      >
+        Order →
+      </a>
+
+    </div>
+
+  </div>
+))}
         </div>
       </div>
 
-      {/* Paket 10 Star */}
-      <div className="mx-auto max-w-6xl px-5 pb-20">
-        <h2 className="mb-10 text-center text-4xl font-black">
+      {/* ================= PAKET 10 STAR ================= */}
+
+      <div className="mx-auto max-w-7xl px-5 pb-24">
+
+        <h2 className="mb-12 text-center text-5xl font-black">
           Paket 10 Star
         </h2>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {package10.map((item) => (
-            <div
-              key={item.title}
-              className="relative overflow-hidden rounded-2xl border border-green-500/20 bg-zinc-900 p-6 transition duration-300 hover:-translate-y-1 hover:border-green-500"
-            >
-              <div className="absolute right-0 top-0 rounded-bl-xl bg-red-500 px-3 py-1 text-xs font-bold text-white">
-                -{item.discount}
-              </div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{package10.map((item) => (
+  <div
+    key={item.title}
+    className="group relative overflow-hidden rounded-3xl border border-green-500/20 bg-gradient-to-b from-zinc-900 to-zinc-950 p-6 transition-all duration-300 hover:-translate-y-2 hover:border-green-400 hover:shadow-[0_0_40px_rgba(34,197,94,.25)]"
+  >
+    <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-green-400 via-emerald-400 to-cyan-400" />
 
-              {item.badge && (
-                <div className="mb-3 inline-flex rounded-full bg-green-500/10 px-3 py-1 text-xs font-semibold text-green-400">
-                  ⭐ {item.badge}
-                </div>
-              )}
+    <div className="absolute right-0 top-0 rounded-bl-2xl bg-gradient-to-r from-red-500 to-pink-500 px-4 py-2 text-xs font-black text-white">
+      -{item.discount}
+    </div>
 
-              <h3 className="text-xl font-bold text-green-400">
-                {item.title}
-              </h3>
+    {item.badge && (
+      <span className="mb-4 inline-flex rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1 text-xs font-bold tracking-wider text-yellow-300">
+        🏆 {item.badge}
+      </span>
+    )}
 
-              <p className="mt-4 text-sm text-zinc-500 line-through">
-                {item.oldPrice}
-              </p>
+    <h3 className="text-2xl font-black text-green-300">
+      {item.title}
+    </h3>
 
-              <p className="text-3xl font-black text-white">
-                {item.price}
-              </p>
+    <p className="mt-5 text-xs uppercase tracking-[0.25em] text-zinc-500">
+      Bundle Price
+    </p>
 
-              <span className="mt-4 inline-flex rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-400">
-                Lebih Hemat
-              </span>
-            </div>
-          ))}
-        </div>
+    <p className="mt-2 text-sm text-red-400/70 line-through">
+      {item.oldPrice}
+    </p>
+
+    <p className="mt-2 text-4xl font-black text-white">
+      {item.price}
+    </p>
+
+    <div className="mt-6 flex items-center justify-between">
+      <span className="rounded-full bg-green-500/10 px-3 py-1 text-xs font-semibold text-green-300">
+        Save More
+      </span>
+
+      <a
+        href="https://wa.me/6285162651533"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-sm font-semibold text-green-300 transition hover:text-green-200"
+      >
+        Order →
+      </a>
+    </div>
+  </div>
+))}        </div>
       </div>
 
-      {/* Paket Rank */}
-      <div className="mx-auto max-w-6xl px-5 pb-20">
-        <h2 className="mb-10 text-center text-4xl font-black">
+      {/* ================= PAKET RANK ================= */}
+
+      <div className="mx-auto max-w-7xl px-5 pb-24">
+
+        <h2 className="mb-12 text-center text-5xl font-black">
           Paket Naik Rank
         </h2>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {rankPackages.map((item) => (
-            <div
-              key={item.title}
-              className="relative overflow-hidden rounded-2xl border border-amber-500/20 bg-zinc-900 p-6 transition duration-300 hover:-translate-y-1 hover:border-amber-500"
-            >
-              {item.discount && (
-                <div className="absolute right-0 top-0 rounded-bl-xl bg-red-500 px-3 py-1 text-xs font-bold text-white">
-                  -{item.discount}
-                </div>
-              )}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{rankPackages.map((item) => (
+  <div
+    key={item.title}
+    className="group relative overflow-hidden rounded-3xl border border-amber-500/20 bg-gradient-to-b from-zinc-900 to-zinc-950 p-6 transition-all duration-300 hover:-translate-y-2 hover:border-amber-400 hover:shadow-[0_0_40px_rgba(251,191,36,.25)]"
+  >
+    <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-yellow-400 via-amber-400 to-orange-500" />
 
-              {item.badge && (
-                <div className="mb-3 inline-flex rounded-full bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-400">
-                  ⭐ {item.badge}
-                </div>
-              )}
-
-              <h3 className="text-xl font-bold text-amber-400">
-                {item.title}
-              </h3>
-
-              {item.oldPrice && (
-                <p className="mt-4 text-sm text-zinc-500 line-through">
-                  {item.oldPrice}
-                </p>
-              )}
-
-              <p className="text-3xl font-black">{item.price}</p>
-
-              <span className="mt-4 inline-flex rounded-full bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-400">
-                Paket Rank
-              </span>
-            </div>
-          ))}
-        </div>
+    {item.discount && (
+      <div className="absolute right-0 top-0 rounded-bl-2xl bg-gradient-to-r from-red-500 to-pink-500 px-4 py-2 text-xs font-black text-white">
+        -{item.discount}
       </div>
+    )}
 
-      {/* Rules */}
-      <div className="mx-auto max-w-5xl px-5 pb-20">
-        <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-8">
-          <h2 className="mb-6 text-3xl font-black">Rules Joki</h2>
+    {item.badge && (
+      <span className="mb-4 inline-flex rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1 text-xs font-bold tracking-wider text-yellow-300">
+        👑 {item.badge}
+      </span>
+    )}
 
-          <ul className="space-y-4 text-zinc-300">
-            {rules.map((rule) => (
-              <li key={rule} className="flex items-start gap-3">
-                <span className="mt-1 text-green-400">✔</span>
-                <span>{rule}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+    <h3 className="text-2xl font-black text-amber-300">
+      {item.title}
+    </h3>
 
-      {/* CTA */}
-      <div className="mx-auto max-w-5xl px-5 pb-24">
-        <div className="rounded-3xl bg-gradient-to-r from-purple-600 to-fuchsia-600 p-10 text-center">
-          <h2 className="text-3xl font-black">
-            Siap Push Rank?
+    <p className="mt-5 text-xs uppercase tracking-[0.25em] text-zinc-500">
+      Package Price
+    </p>
+
+    {item.oldPrice && (
+      <p className="mt-2 text-sm text-red-400/70 line-through">
+        {item.oldPrice}
+      </p>
+    )}
+
+    <p className="mt-2 text-4xl font-black text-white">
+      {item.price}
+    </p>
+
+    <div className="mt-6 flex items-center justify-between">
+      <span className="rounded-full bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-300">
+        Rank Boost
+      </span>
+
+      <a
+        href="https://wa.me/6285162651533"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-sm font-semibold text-amber-300 transition hover:text-amber-200"
+      >
+        Order →
+      </a>
+    </div>
+  </div>
+))}</div></div>
+
+      {/* ================= RULES ================= */}
+
+      <div className="mx-auto max-w-6xl px-5 pb-24">
+
+        <div className="relative overflow-hidden rounded-[32px] border border-cyan-500/20 bg-gradient-to-b from-zinc-900 to-zinc-950 p-8">
+
+          <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500" />
+
+          <h2 className="text-center text-4xl font-black">
+            📜 Rules & Information
           </h2>
 
-          <p className="mt-4 text-purple-100">
-            Hubungi admin sekarang dan dapatkan pelayanan cepat,
-            aman, dan profesional.
+          <p className="mx-auto mt-4 max-w-2xl text-center text-zinc-400">
+            Mohon membaca seluruh ketentuan sebelum melakukan order
+            agar proses berjalan lancar.
           </p>
 
-          <a
-            href="https://wa.me/6285162651533"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-flex rounded-xl bg-white px-8 py-3 font-bold text-purple-700 transition hover:scale-105"
-          >
-            Order via WhatsApp
-          </a>
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+
+            {rules.map((rule) => (
+              <div
+                key={rule}
+                className="flex items-start gap-4 rounded-2xl border border-white/5 bg-white/5 p-5 backdrop-blur"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-500/10 text-green-400">
+                  ✔
+                </div>
+
+                <p className="leading-7 text-zinc-300">
+                  {rule}
+                </p>
+              </div>
+            ))}
+
+          </div>
+
         </div>
+
       </div>
+
+      {/* ================= CTA ================= */}
+
+      <div className="mx-auto max-w-6xl px-5 pb-28">
+
+        <div className="relative overflow-hidden rounded-[36px] border border-cyan-500/20 bg-gradient-to-br from-cyan-500 via-blue-600 to-violet-700 p-10 md:p-14">
+
+          <div className="absolute -right-24 -top-24 h-60 w-60 rounded-full bg-white/10 blur-3xl" />
+
+          <div className="absolute -bottom-24 -left-24 h-60 w-60 rounded-full bg-white/10 blur-3xl" />
+
+          <div className="relative text-center">
+
+            <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.3em] text-cyan-100">
+              Ready To Rank Up?
+            </span>
+
+            <h2 className="mt-8 text-4xl font-black md:text-6xl">
+              PUSH YOUR RANK
+              <br />
+              WITH SHIGE
+            </h2>
+
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-cyan-100/90">
+              Nikmati layanan joki profesional dengan proses cepat,
+              aman, dan dikerjakan oleh player berpengalaman.
+            </p>
+
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+
+              <a
+                href="https://wa.me/6285162651533"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-2xl bg-white px-8 py-4 font-bold text-blue-700 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              >
+                ⚡ Order via WhatsApp
+              </a>
+
+              <a
+                href="#harga"
+                className="rounded-2xl border border-white/20 bg-white/10 px-8 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
+              >
+                💎 Lihat Daftar Harga
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* ================= FOOTER ================= */}
+
+      <div className="border-t border-white/5 py-8">
+
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 text-center text-sm text-zinc-500 md:flex-row">
+
+          <p>
+            © {new Date().getFullYear()} SHIGE CREW • Joki Service
+          </p>
+
+          <div className="flex items-center gap-3">
+
+            <span className="rounded-full bg-green-500/10 px-3 py-1 text-xs font-semibold text-green-400">
+              🟢 Online
+            </span>
+
+            <span className="rounded-full bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-400">
+              Secure Service
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </section>
   );
 }
