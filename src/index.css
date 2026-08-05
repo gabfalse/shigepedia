@@ -1,1 +1,148 @@
 @import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-zinc-950 text-white antialiased;
+  }
+}
+
+@layer components {
+
+  /* ===============================
+      Layout
+  =============================== */
+
+  .container-page {
+    @apply relative mx-auto flex min-h-screen w-full max-w-lg flex-col items-center justify-center px-5 py-16;
+  }
+
+  .section-page {
+    @apply relative mx-auto max-w-7xl px-5 py-24;
+  }
+
+  .section-page-sm {
+    @apply relative mx-auto max-w-6xl px-5 py-20;
+  }
+
+  .section-title {
+    @apply mb-4 text-center text-xs font-semibold uppercase tracking-[0.3em] text-zinc-500;
+  }
+
+  /* ===============================
+      Background
+  =============================== */
+
+  .bg-grid {
+    @apply absolute inset-0 opacity-20;
+    background-image:
+      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .bg-top-glow {
+    @apply absolute inset-0;
+    background: radial-gradient(circle at top, #7c3aed30, transparent 45%);
+  }
+
+  .bg-bottom-glow {
+    @apply absolute inset-0;
+    background: radial-gradient(circle at bottom, #0ea5e920, transparent 45%);
+  }
+
+  /* ===============================
+      Glass
+  =============================== */
+
+  .glass {
+    @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl;
+  }
+
+  .glass-lg {
+    @apply rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl;
+  }
+
+  .glass-card {
+    @apply rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2;
+  }
+
+  .glass-card-lg {
+    @apply rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl;
+  }
+
+  .price-card {
+    @apply relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2;
+  }
+
+  .feature-card {
+    @apply relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2;
+  }
+
+  .rule-card {
+    @apply flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl;
+  }
+
+  /* ===============================
+      Button
+  =============================== */
+
+  .portal-btn {
+    @apply flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-6 py-4 backdrop-blur-xl transition-all duration-300;
+  }
+
+  .portal-btn-arrow {
+    @apply text-lg transition-transform;
+  }
+
+  .primary-btn {
+    @apply flex items-center justify-between rounded-3xl bg-gradient-to-r from-purple-600 to-violet-500 px-6 py-5 shadow-xl shadow-purple-900/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-purple-500/40;
+  }
+
+  /* ===============================
+      Logo
+  =============================== */
+
+  .logo-frame {
+    @apply flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-2xl backdrop-blur-xl;
+  }
+
+  /* ===============================
+      Badge
+  =============================== */
+
+  .badge {
+    @apply rounded-full border border-yellow-500/30 bg-yellow-500/10 px-3 py-1 text-xs font-bold tracking-wider text-yellow-300;
+  }
+
+  .discount-badge {
+    @apply absolute right-0 top-0 rounded-bl-2xl bg-gradient-to-r from-red-500 to-pink-500 px-4 py-2 text-xs font-black text-white;
+  }
+
+  .gradient-line {
+    @apply absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-purple-500 via-violet-400 to-cyan-400;
+  }
+
+  /* ===============================
+      Footer
+  =============================== */
+
+  .footer-text {
+    @apply text-xs text-zinc-500;
+  }
+
+  .footer-sub {
+    @apply mt-2 text-[11px] text-zinc-600;
+  }
+
+  /* ===============================
+      Loading
+  =============================== */
+
+  .loading-spinner {
+    @apply h-10 w-10 animate-spin rounded-full border-4 border-purple-500 border-t-transparent;
+  }
+}
