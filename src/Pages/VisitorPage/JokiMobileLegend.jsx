@@ -1,30 +1,28 @@
 import { useRef } from "react";
 import {
   ChevronRight,
-  Star,
-  Crown,
-  Flame,
+  
   ShieldCheck,
   Clock3,
   BadgeCheck,
   Headphones,
 } from "lucide-react";
 
-import { SERVICES } from "../../Data/Service";
+// import { SERVICES } from "../../Data/Service";
 import { BENEFITS } from "../../Data/Benefit";
 
-import ServiceCard from "../../Components/JokiComponent/ServiceCartd";
+// import ServiceCard from "../../Components/JokiComponent/ServiceCartd";
 import BenefitCard from "../../Components/JokiComponent/BenefitCard";
 import OrderForm from "../../Components/JokiComponent/OrderForm";
 
 export default function JokiMobileLegend() {
   const orderRef = useRef(null);
 
-  const serviceIcons = {
-    star: <Star className="h-8 w-8 text-yellow-400" />,
-    pack10: <Flame className="h-8 w-8 text-orange-400" />,
-    rank: <Crown className="h-8 w-8 text-cyan-400" />,
-  };
+  // const serviceIcons = {
+  //   star: <Star className="h-8 w-8 text-yellow-400" />,
+  //   pack10: <Flame className="h-8 w-8 text-orange-400" />,
+  //   rank: <Crown className="h-8 w-8 text-cyan-400" />,
+  // };
 
   const benefitIcons = {
     shield: <ShieldCheck className="h-6 w-6 text-violet-400" />,
@@ -79,7 +77,7 @@ export default function JokiMobileLegend() {
         </div>
       </section>
 
-      {/* ================= LAYANAN ================= */}
+      {/* ================= LAYANAN =================
 
       <section className="section-page">
         <p className="section-title">
@@ -95,7 +93,7 @@ export default function JokiMobileLegend() {
             />
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* ================= BENEFIT ================= */}
 

@@ -7,16 +7,16 @@ export const PRODUCT = [
   {
     id: "pack5",
     title: "Paket 5 Bintang",
-    description: "Diskon otomatis 2%.",
+    description: "Lebih Hemat Ambil Pkaet 5 bintang",
   },
   {
     id: "pack10",
     title: "Paket 10 Bintang",
-    description: "Diskon otomatis 5%.",
+    description: "Paket 10 Bintang Super hemat.",
   },
   {
     id: "rank",
     title: "Naik Rank",
-    description: "Hitung sampai rank tujuan.",
+    description: "PALING HEMAT!!!.",
   },
 ];
