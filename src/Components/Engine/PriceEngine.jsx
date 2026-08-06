@@ -3,7 +3,7 @@ import { getStarBreakdown } from "./RankEngine";
 import {
   getProductPromo,
   getManualDiscount,
-} from "./promoEngine";
+} from "./PromoEngine";
 
 /* =========================
    Hitung Harga Normal

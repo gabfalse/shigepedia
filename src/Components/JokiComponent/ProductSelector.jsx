@@ -1,4 +1,4 @@
-import { PRODUCT } from "../../config/Product";
+import { PRODUCT } from "../../Data/Product";
 
 export default function ProductSelector({
   value,
