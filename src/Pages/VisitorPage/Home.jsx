@@ -5,8 +5,8 @@ import PortalSection from "../../Components/HomeComponents/PortalSection";
 import RecruitmentCard from "../../Components/HomeComponents/RecruitmentCard";
 
 
-import { homeSlides } from "../../Components/Data/HomeSlides";
-import { portals } from "../../Components/Data/Portals";
+import { homeSlides } from "../../Data/HomeSlides";
+import { portals } from "../../Data/Portals";
 
 function Home() {
   return (

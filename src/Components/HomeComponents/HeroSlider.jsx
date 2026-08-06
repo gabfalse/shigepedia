@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { homeSlides } from "../Data/HomeSlides";
+import { homeSlides } from "../../Data/HomeSlides";
 
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0);

@@ -1,4 +1,4 @@
-import { portals } from "../Data/Portals";
+import { portals } from "../../Data/Portals";
 
 const colorClass = {
   sky: "hover:border-sky-400 hover:bg-sky-500/10",
