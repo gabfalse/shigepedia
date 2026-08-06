@@ -1,168 +1,311 @@
 import { RANKS } from "../../Config/Rank";
 
-export const TIERS = RANKS.flatMap((rank) => {
-  if (rank.divisions) {
-    return rank.divisions.map((division) => ({
-      rank: rank.id,
-      name: `${rank.name} ${division}`,
-      division,
-    }));
+
+export const TIERS =
+RANKS.flatMap((rank)=>{
+
+
+  if(rank.divisions){
+
+    return rank.divisions.map(
+      (division)=>({
+
+        rank:rank.id,
+
+        name:
+          `${rank.name} ${division}`,
+
+        division,
+
+      })
+    );
+
   }
+
 
   return [
     {
-      rank: rank.id,
-      name: rank.name,
-      division: null,
-    },
+      rank:rank.id,
+
+      name:rank.name,
+
+      division:null,
+    }
   ];
+
 });
 
-export function getTier(tierName) {
-  return TIERS.find((tier) => tier.name === tierName) ?? null;
+
+
+export function getTier(name){
+
+  return (
+    TIERS.find(
+      (tier)=>
+        tier.name === name
+    )
+    ??
+    null
+  );
+
 }
 
-export function getTierIndex(tierName) {
-  return TIERS.findIndex((tier) => tier.name === tierName);
+
+
+export function getTierIndex(name){
+
+  return TIERS.findIndex(
+    tier =>
+      tier.name === name
+  );
+
 }
 
-export function getTierByIndex(index) {
-  return TIERS[index] ?? null;
+
+
+export function nextTier(name){
+
+  const index =
+    getTierIndex(name);
+
+
+  if(index === -1)
+    return null;
+
+
+  return (
+    TIERS[index+1]
+    ??
+    null
+  );
+
 }
 
-export function nextTier(tierName) {
-  const index = getTierIndex(tierName);
 
-  if (index === -1) return null;
 
-  return TIERS[index + 1] ?? null;
+
+export function isMythicTier(name){
+
+  return [
+
+    "Mythic",
+    "Honor",
+    "Glory",
+    "Immortal",
+
+  ].includes(name);
+
 }
 
-export function previousTier(tierName) {
-  const index = getTierIndex(tierName);
 
-  if (index === -1) return null;
 
-  return TIERS[index - 1] ?? null;
-}
 
-export function isMythicTier(tierName) {
-  return ["Mythic", "Honor", "Glory", "Immortal"].includes(tierName);
-}
+export function normalizeTier(
+  tierName,
+  stars
+){
 
-export function normalizeTier(tierName, stars) {
-  // Mythic ke atas
-  if (isMythicTier(tierName)) {
-    if (stars <= 24) {
+
+  if(isMythicTier(tierName)){
+
+
+    if(stars <= 24){
+
       return {
-        tier: "Mythic",
-        stars: Math.max(1, stars),
+        tier:"Mythic",
+        stars
       };
+
     }
 
-    if (stars <= 49) {
+
+    if(stars <=49){
+
       return {
-        tier: "Honor",
-        stars,
+        tier:"Honor",
+        stars
       };
+
     }
 
-    if (stars <= 99) {
+
+    if(stars <=99){
+
       return {
-        tier: "Glory",
-        stars,
+        tier:"Glory",
+        stars
       };
+
     }
+
 
     return {
-      tier: "Immortal",
+
+      tier:"Immortal",
+
       stars,
+
     };
+
+
   }
 
-  // Rank biasa
-  let currentTier = tierName;
-  let currentStars = stars;
 
-  while (currentStars > 5) {
-    currentStars -= 5;
 
-    const next = nextTier(currentTier);
+  let tier =
+    tierName;
 
-    if (!next) break;
 
-    currentTier = next.name;
+  let star =
+    stars;
 
-    if (currentTier === "Mythic") {
-      return normalizeTier("Mythic", currentStars);
+
+
+  while(star > 5){
+
+
+    star -= 5;
+
+
+    const next =
+      nextTier(tier);
+
+
+
+    if(!next)
+      break;
+
+
+
+    tier =
+      next.name;
+
+
+
+    if(tier==="Mythic"){
+
+      return normalizeTier(
+        "Mythic",
+        star
+      );
+
     }
+
+
   }
+
+
 
   return {
-    tier: currentTier,
-    stars: Math.max(1, currentStars),
+
+    tier,
+
+    stars:
+      Math.max(
+        1,
+        star
+      )
+
   };
+
+
 }
 
-export function moveOneStar(tierName, stars) {
-  return normalizeTier(tierName, stars + 1);
+
+
+
+export function moveOneStar(
+  tier,
+  stars
+){
+
+  return normalizeTier(
+    tier,
+    stars + 1
+  );
+
 }
 
-export function getTotalStars(tierName, stars) {
-  const tier = getTier(tierName);
 
-  if (!tier) return 0;
 
-  if (!isMythicTier(tierName)) {
-    const tierIndex = getTierIndex(tierName);
-    return (tierIndex * 5) + stars;
-  }
-
-  return 95 + stars;
-}
-
-export function countStars(
-  currentTier,
-  currentStars,
-  targetTier,
-  targetStars
-) {
-  const current = getTotalStars(currentTier, currentStars);
-  const target = getTotalStars(targetTier, targetStars);
-
-  return Math.max(0, target - current);
-}
 
 export function getStarBreakdown(
   currentTier,
   currentStars,
   targetTier,
   targetStars
-) {
-  const breakdown = [];
+){
 
-  let tier = currentTier;
-  let stars = currentStars;
 
-  while (!(tier === targetTier && stars === targetStars)) {
-    const rankId = getTier(tier).rank;
+  const result=[];
 
-    const current = breakdown.find((item) => item.rank === rankId);
 
-    if (current) {
-      current.stars++;
-    } else {
-      breakdown.push({
-        rank: rankId,
-        stars: 1,
+  let tier=currentTier;
+
+  let stars=currentStars;
+
+
+
+  while(
+    !(
+      tier===targetTier &&
+      stars===targetStars
+    )
+  ){
+
+
+    const rank =
+      getTier(tier).rank;
+
+
+
+    const exist =
+      result.find(
+        item =>
+          item.rank===rank
+      );
+
+
+
+    if(exist){
+
+      exist.stars++;
+
+    }else{
+
+      result.push({
+
+        rank,
+
+        stars:1,
+
       });
+
     }
 
-    const next = moveOneStar(tier, stars);
 
-    tier = next.tier;
-    stars = next.stars;
+
+    const next =
+      moveOneStar(
+        tier,
+        stars
+      );
+
+
+
+    tier =
+      next.tier;
+
+
+    stars =
+      next.stars;
+
+
   }
 
-  return breakdown;
+
+
+  return result;
+
+
 }
