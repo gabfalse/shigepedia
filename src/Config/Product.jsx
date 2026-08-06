@@ -7,7 +7,7 @@ export const PRODUCT = [
   {
     id: "pack5",
     title: "Paket 5 Bintang",
-    description: "Lebih Hemat Ambil Pkaet 5 bintang",
+    description: "Lebih Hemat Ambil Paket 5 bintang",
   },
   {
     id: "pack10",
