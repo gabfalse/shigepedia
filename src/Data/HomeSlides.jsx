@@ -1,6 +1,6 @@
-import TeamBanner from "../assets/teamBanner.png";
-import TopupBanner from "../assets/TopupBanner.png";
-import JokiBanner from "../assets/jokiBanner.png";
+import TeamBanner from "../../src/assets/teamBanner.png";
+import TopupBanner from "../../src/assets/TopupBanner.png";
+import JokiBanner from "../../src/assets/JokiBanner.png";
 
 export const homeSlides = [
   {
