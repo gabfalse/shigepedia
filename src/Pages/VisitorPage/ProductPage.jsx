@@ -1,6 +1,7 @@
 import { useState } from "react";
 import OrderForm from "../../Components/JokiComponents/OrderForm";
 import OrderSummary from "../../Components/JokiComponents/OrderSummary";
+import FloatingWhatsapp from "../../Components/JokiComponents/FloatingWhatsapp";
 
 const promotions = [
   {
@@ -50,6 +51,7 @@ export default function ProductPage() {
           onApplyPromo={handleApplyPromo}
         />
       </div>
+      <FloatingWhatsapp/>
     </div>
   );
 }
