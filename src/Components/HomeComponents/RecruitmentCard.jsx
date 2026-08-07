@@ -1,25 +1,27 @@
 export default function RecruitmentCard() {
   return (
-    <section className="mt-10 w-full">
+    <section className="mx-auto max-w-2xl">
       <a
-        href="/about"
-        className="primary-btn group"
+        href="/recruitment"
+        className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:border-violet-500 hover:bg-violet-500/10"
       >
-        <div>
-          <p className="text-xs uppercase tracking-widest text-purple-200">
-            Open Recruitment
-          </p>
+        <div className="flex items-center gap-4">
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-2xl">
+            🚀
+          </div>
 
-          <h2 className="mt-1 text-lg font-bold">
-            🚀 Join SHIGE CREW
-          </h2>
+          <div>
+            <h2 className="font-semibold text-white">
+              Open Recruitment
+            </h2>
 
-          <p className="mt-1 text-sm text-purple-100/80">
-            Bergabung bersama komunitas gamer & kreator terbaik.
-          </p>
+            <p className="mt-1 text-sm text-zinc-400">
+              Bergabung bersama SHIGE CREW sebagai pemain, kreator, atau talent.
+            </p>
+          </div>
         </div>
 
-        <span className="text-3xl transition group-hover:translate-x-1">
+        <span className="text-xl text-zinc-500 transition group-hover:translate-x-1 group-hover:text-violet-400">
           →
         </span>
       </a>

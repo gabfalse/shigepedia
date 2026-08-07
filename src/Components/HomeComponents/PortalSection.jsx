@@ -1,33 +1,41 @@
 import { portals } from "../../Data/Portals";
 
-const colorClass = {
-  sky: "hover:border-sky-400 hover:bg-sky-500/10",
-  pink: "hover:border-pink-400 hover:bg-pink-500/10",
-  amber: "hover:border-amber-400 hover:bg-amber-500/10",
-  emerald: "hover:border-emerald-400 hover:bg-emerald-500/10",
-  purple: "hover:border-purple-400 hover:bg-purple-500/10",
-};
-
 export default function PortalSection() {
   return (
-    <section className="mt-10 w-full">
-      <h2 className="section-title">Portal SHIGE</h2>
+    <section className="mx-auto max-w-2xl">
+      <div className="mb-4 text-center">
+        <h2 className="title">Portal SHIGE</h2>
+        
+      </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="space-y-4">
         {portals.map((portal) => (
           <a
             key={portal.title}
             href={portal.url}
             target={portal.external ? "_blank" : undefined}
             rel={portal.external ? "noopener noreferrer" : undefined}
-            className={`portal-btn group ${colorClass[portal.color] || ""}`}
+            className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:border-violet-500 hover:bg-violet-500/10"
           >
-            <span className="flex items-center gap-3 font-medium">
-              <span className="text-xl">{portal.icon}</span>
-              {portal.title}
-            </span>
+            <div className="flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-2xl">
+                {portal.icon}
+              </div>
 
-            <span className="portal-btn-arrow group-hover:translate-x-1">
+              <div>
+                <h3 className="font-semibold text-white">
+                  {portal.title}
+                </h3>
+
+                {portal.description && (
+                  <p className="mt-1 text-sm text-zinc-400">
+                    {portal.description}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <span className="text-xl text-zinc-500 transition group-hover:translate-x-1 group-hover:text-violet-400">
               →
             </span>
           </a>

@@ -1,30 +1,29 @@
 import Background from "../../Components/HomeComponents/Background";
 import HeroSlider from "../../Components/HomeComponents/HeroSlider";
 import PortalSection from "../../Components/HomeComponents/PortalSection";
-
 import RecruitmentCard from "../../Components/HomeComponents/RecruitmentCard";
-
 
 import { homeSlides } from "../../Data/HomeSlides";
 import { portals } from "../../Data/Portals";
 
-function Home() {
+export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden">
+    <main className="relative overflow-hidden bg-base">
       <Background />
 
-      <div className="container-page">
-        <HeroSlider slides={homeSlides} />
+      <div className="container relative z-10">
+        <section className="section">
+          <HeroSlider slides={homeSlides} />
+        </section>
 
-        <PortalSection portals={portals} />
+        <section className="section">
+          <PortalSection portals={portals} />
+        </section>
 
-
-        <RecruitmentCard />
-
-      
+        <section className="section">
+          <RecruitmentCard />
+        </section>
       </div>
     </main>
   );
 }
-
-export default Home;

@@ -2,7 +2,8 @@ import { Route } from "react-router-dom";
 
 import AboutPage from "../Pages/VisitorPage/About";
 import  Home  from "../Pages/VisitorPage/Home";
-import JokiMobileLegend from "../Pages/VisitorPage/JokiMobileLegend";
+
+import ProductPage from "../Pages/VisitorPage/ProductPage";
 
 
 
@@ -22,7 +23,7 @@ const VisitorRoute = () => {
 
        <Route
         path="/joki"
-        element={<JokiMobileLegend />}
+        element={<ProductPage />}
       />
    
       
