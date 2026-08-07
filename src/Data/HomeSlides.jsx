@@ -1,4 +1,4 @@
-import TeamBanner from "../../src/assets/teamBanner.png";
+import TeamBanner from "../../src/assets/TeamBanner.png";
 import TopupBanner from "../../src/assets/TopupBanner.png";
 import JokiBanner from "../../src/assets/JokiBanner.png";
 
