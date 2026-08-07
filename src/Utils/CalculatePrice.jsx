@@ -1,4 +1,4 @@
-import { travelRank } from "./rankEngine";
+import { travelRank } from "./RankEngine";
 
 /**
  * Menghitung harga Joki Per Bintang
